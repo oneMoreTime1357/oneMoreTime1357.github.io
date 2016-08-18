@@ -80,19 +80,37 @@
 
 
 
-<meta name="description" content="##NSUserDefaults
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统">
+<meta name="description" content="####CollectionView 拖拽移动
+######iOS9新特性，collectionView的退拽
+
+创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
+
+‘’’
+- (UICollectionView *)collectionView {
+if(_collec">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据存储 NSUserDefaults">
-<meta property="og:url" content="http://yoursite.com/2016/05/10/nsuserdefaults/index.html">
+<meta property="og:title" content="一棵树">
+<meta property="og:url" content="http://yoursite.com/2016/08/17/collectionview_拖拽移动/index.html">
 <meta property="og:site_name" content="一棵树">
-<meta property="og:description" content="##NSUserDefaults
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统">
-<meta property="og:updated_time" content="2016-07-10T15:05:48.000Z">
+<meta property="og:description" content="####CollectionView 拖拽移动
+######iOS9新特性，collectionView的退拽
+
+创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
+
+‘’’
+- (UICollectionView *)collectionView {
+if(_collec">
+<meta property="og:updated_time" content="2016-08-18T23:17:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据存储 NSUserDefaults">
-<meta name="twitter:description" content="##NSUserDefaults
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统">
+<meta name="twitter:title" content="一棵树">
+<meta name="twitter:description" content="####CollectionView 拖拽移动
+######iOS9新特性，collectionView的退拽
+
+创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
+
+‘’’
+- (UICollectionView *)collectionView {
+if(_collec">
 
 
 
@@ -110,7 +128,7 @@
   };
 </script>
 
-  <title> 数据存储 NSUserDefaults | 一棵树 </title>
+  <title>  | 一棵树 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +258,7 @@
             
             
               
-                数据存储 NSUserDefaults
+                
               
             
           </h1>
@@ -252,8 +270,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-10T21:31:51+08:00" content="2016-05-10">
-              2016-05-10
+            <time itemprop="dateCreated" datetime="2016-08-17T13:30:30+08:00" content="2016-08-17">
+              2016-08-17
             </time>
           </span>
 
@@ -263,8 +281,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/10/nsuserdefaults/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/10/nsuserdefaults/" itemprop="commentsCount"></span>
+                <a href="/2016/08/17/collectionview_拖拽移动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/collectionview_拖拽移动/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -274,7 +292,7 @@
 
           
           
-             <span id="/2016/05/10/nsuserdefaults/" class="leancloud_visitors" data-flag-title="数据存储 NSUserDefaults">
+             <span id="/2016/08/17/collectionview_拖拽移动/" class="leancloud_visitors" data-flag-title="">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -296,37 +314,240 @@
       
 
       
-        <p>##NSUserDefaults</p>
-<p>用户轻量级的<br>NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行同步。</p>
+        <p>####CollectionView 拖拽移动</p>
+<p>######iOS9新特性，collectionView的退拽</p>
 <ul>
-<li><p>存数据</p>
-<pre><code>  //获取NSUserDefaults 对象
- NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-// 存数据，不需要设置路径，NSUserDefaults 将数据保存在preferrences目录下
-     [userDefaults setObject:@&quot;Jane&quot; forKey:@&quot;name&quot;];
-     [userDefaults setObject:@&quot;phone&quot; forKey:@&quot;1892233232&quot;];
-  // 立刻保存同步数据，（如果不写这句话，会在将来某个时间点将数据保存在preference目录下）
-  [userDefaults synchronize];
-</code></pre></li>
+<li>创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。</li>
 </ul>
-<ul>
-<li><p>取数据</p>
-<pre><code>//获取NSUserDefaults对象
-NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    //读取数据
-    NSString *userName  = [userDefaults objectForKey:@&quot;name&quot;];
-    NSString *userPhone  = [userDefaults objectForKey:@&quot;phone&quot;];
-</code></pre></li>
-<li><p>判断一个数据是否存储在NSUserDefaults 中</p>
-<pre><code>if ([userDefaults objectForKey:@&quot;Kite&quot;] == nil) {
-nslog(@&quot;没有存储Kite用户这个数据&quot;);
+<p>‘’’</p>
+<pre><code>- (UICollectionView *)collectionView {
+if(_collectionView == nil) {
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(45, 45);
+    flowLayout.minimumLineSpacing = 10;
+    flowLayout.minimumInteritemSpacing = 10;
+    flowLayout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight) collectionViewLayout:flowLayout];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    [_collectionView registerClass:[MoveCollectionViewCell class] forCellWithReuseIdentifier:identity];
+
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+    [_collectionView addGestureRecognizer:longPressGesture];
+
 }
-</code></pre></li>
-<li><p>如果存储 key 相同，value 不同的数据，后面的数据会把前面的数据替换掉。 </p>
-<pre><code> //执行完这行代码，文件中存储的数据就是现在的心value
- [[NSUserDefaults standardUserDefaults] setObject:@&quot;phone&quot; forKey:@&quot;1877230212&quot;];
-[userDefaults synchronize];
-</code></pre></li>
+return _collectionView;
+}
+</code></pre><p>‘’’</p>
+<ul>
+<li>实现datasource ，加入数据源，</li>
+</ul>
+<p>‘’’</p>
+<pre><code>- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+return _data.count;
+}
+</code></pre><p>‘’’</p>
+<p>‘’’</p>
+<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+MoveCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identity forIndexPath:indexPath];
+cell.img = _data[indexPath.row];
+return cell;
+
+}
+</code></pre><ul>
+<li>下面使用iOS9的新特性实现拖拽，必须实现下面的方法</li>
+</ul>
+<p>‘’’开始移动的时候调用此方法，可以获取相应的datasource方法设置特殊的indexpath 能否移动,如果能移动返回的是YES ,不能移动返回的是NO</p>
+<pre><code>- (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath
+</code></pre><p>‘’’</p>
+<p>‘’’更新移动过程的位置</p>
+<pre><code>- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition
+</code></pre><p>‘’’</p>
+<p>‘’’结束移动的时候调用此方法，collectionView 会响应相应的datasource方法，collectionView:moveItemAtIndexPath:toIndexPath:  我们可以在这个方法中将移动的数据源，与目标数据源交互位置。</p>
+<pre><code>- (void)endInteractiveMovement
+</code></pre><p>‘’’</p>
+<p>‘’’取消移动的时候调用，会返回最原始的位置。</p>
+<pre><code>- (void)cancelInteractiveMovement
+</code></pre><p>‘’’</p>
+<p>‘’’在开始移动的时候会调用这个方法，如果有特殊的单元格不想被移动可以return NO， 如果没有限制就返回YES 吧。</p>
+<pre><code>- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>‘’’</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明            </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">collectionView</td>
+<td style="text-align:left">调用这个代理方法的 collection View</td>
+</tr>
+<tr>
+<td style="text-align:left">indexPath</td>
+<td style="text-align:left">collectionView 中想要移动的 indexpath</td>
+</tr>
+</tbody>
+</table>
+<p>‘’’移动结束的时候会调用此datasource，想要拖拽完成之后数据正确必须实现此方法，使用新的路径更新数据源，如果不实现此方法，刚刚移动cell中的数据不会重新排列。</p>
+<pre><code>- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+       toIndexPath:(NSIndexPath *)destinationIndexPath
+</code></pre><p>‘’’</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明            </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">collectionView</td>
+<td style="text-align:left">正在响应这个方法的collectionView</td>
+</tr>
+<tr>
+<td style="text-align:left">sourceIndexPath</td>
+<td style="text-align:left">原始移动的indexpath</td>
+</tr>
+<tr>
+<td style="text-align:left">destinationIndexPath</td>
+<td style="text-align:left">移动到目标位置的indexpath</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>刚刚我们已经给collectionView 添加了长按的手势，目的就是长按的时候，可以拖动cell来进行移动，那怎么开始移动呢？我们来实现长按事件看看。</li>
+</ul>
+<p>‘’’</p>
+<pre><code>- (void)longPressAction:(UILongPressGestureRecognizer *)longPress {
+
+//获取此次点击的坐标，根据坐标获取cell对应的indexPath
+CGPoint point = [longPress locationInView:_collectionView];
+NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+//根据长按手势的状态进行处理。
+switch (longPress.state) {
+    case UIGestureRecognizerStateBegan:
+        //当没有点击到cell的时候不进行处理
+        if (!indexPath) {
+            break;
+        }
+        //开始移动
+        [_collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
+
+        break;
+
+    case UIGestureRecognizerStateChanged:
+    //移动过程中更新位置坐标
+        [_collectionView updateInteractiveMovementTargetPosition:point];
+        break;
+
+    case UIGestureRecognizerStateEnded:
+    //停止移动调用此方法
+        [_collectionView endInteractiveMovement];
+        break;
+
+    default:
+    //取消移动
+        [_collectionView cancelInteractiveMovement];
+        break;
+}
+
+}    
+</code></pre><p>‘’’</p>
+<ul>
+<li>下面这两个方法都需要实现。</li>
+</ul>
+<p>‘’’在开始移动时会调用此代理方法，</p>
+<pre><code>- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+//如果都可以移动，直接就返回YES ,不能移动的返回NO
+return YES;
+}    
+</code></pre><p>‘’’在移动结束的时候调用此代理方法</p>
+<pre><code>    - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath {
+/**
+ *sourceIndexPath 原始数据 indexpath
+ * destinationIndexPath 移动到目标数据的 indexPath
+ */
+
+[_data removeObjectAtIndex:sourceIndexPath.row];
+
+UIImage *img = _data[sourceIndexPath.row];
+
+[_data insertObject:img atIndex:destinationIndexPath.row];
+
+}
+</code></pre><ul>
+<li><p>如果你的手机支持iOS9或更高版本，使用苹果为我们提供的方法实现拖拽功能是没有问题的。相信还有很多都在支持ios8，所以下面的方法也许很适用。</p>
+<ul>
+<li><p>在(UICollectionViewCell <em>)collectionView:(UICollectionView </em>)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath 方法中，为每个cell添加长按手势，这样就可以在你长按cell的时候响应事件。</p>
+</li>
+<li><p>下面我们看看长按事件中应该实现怎样的方法。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>‘’’</p>
+<pre><code>    - (void)longPressAction:(UILongPressGestureRecognizer *)longPress {
+
+   //获取当前cell所对应的indexpath 
+   MoveCollectionViewCell *cell = (MoveCollectionViewCell *)longPress.view;
+NSIndexPath *cellIndexpath = [_collectionView indexPathForCell:cell];
+
+//将此cell 移动到视图的前面
+[_collectionView bringSubviewToFront:cell];
+
+_isChange = NO;
+
+switch (longPress.state) {
+    case UIGestureRecognizerStateBegan: {
+    //使用数组将collectionView每个cell的 UICollectionViewLayoutAttributes 存储起来。
+        [self.cellAttributesArray removeAllObjects];
+        for (int i = 0; i &lt; self.data.count; i++) {
+            [self.cellAttributesArray addObject:[_collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]]];
+        }
+
+    }
+
+        break;
+
+    case UIGestureRecognizerStateChanged: {
+        //在移动过程中，使cell的中心与移动的位置相同。
+        cell.center = [longPress locationInView:_collectionView];
+
+        for (UICollectionViewLayoutAttributes *attributes in self.cellAttributesArray) {
+        //判断移动cell的indexpath，是否和目的位置相同，如果相同isChange为YES,然后将数据源交换
+            if (CGRectContainsPoint(attributes.frame, cell.center) &amp;&amp; cellIndexpath != attributes.indexPath) {
+                _isChange = YES;
+                NSString *imgStr = self.data[cellIndexpath.row];
+                [self.data removeObjectAtIndex:cellIndexpath.row];
+                [self.data insertObject:imgStr atIndex:attributes.indexPath.row];
+                [self.collectionView moveItemAtIndexPath:cellIndexpath toIndexPath:attributes.indexPath];
+            }
+        }
+
+    }
+
+        break;
+
+    case UIGestureRecognizerStateEnded: {
+        //如果没有改变，直接返回原始位置
+        if (!_isChange) {
+            cell.center = [_collectionView layoutAttributesForItemAtIndexPath:cellIndexpath].center;
+        }
+    }
+
+        break;
+
+    default:
+        break;
+        }
+
+    }
+</code></pre><ul>
+<li>不使用iOS9的代理方法，实现拖拽移动也很简单。</li>
 </ul>
 
       
@@ -351,17 +572,13 @@ nslog(@&quot;没有存储Kite用户这个数据&quot;);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/07/oneDay/" rel="next" title="oneDay">
-                <i class="fa fa-chevron-left"></i> oneDay
+              <a href="/2016/05/10/nsuserdefaults/" rel="next" title="数据存储 NSUserDefaults">
+                <i class="fa fa-chevron-left"></i> 数据存储 NSUserDefaults
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/17/collectionview_拖拽移动/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -387,8 +604,8 @@ nslog(@&quot;没有存储Kite用户这个数据&quot;);
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/10/nsuserdefaults/"
-           data-title="数据存储 NSUserDefaults" data-url="http://yoursite.com/2016/05/10/nsuserdefaults/">
+      <div class="ds-thread" data-thread-key="2016/08/17/collectionview_拖拽移动/"
+           data-title="" data-url="http://yoursite.com/2016/08/17/collectionview_拖拽移动/">
       </div>
     
   </div>
