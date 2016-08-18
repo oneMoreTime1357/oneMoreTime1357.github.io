@@ -80,15 +80,15 @@
 
 
 
-<meta name="description" content="我只想做一棵树，随风摇摆枝叶繁茂">
+<meta name="description" content="一棵树的喃喃细语">
 <meta property="og:type" content="website">
 <meta property="og:title" content="一棵树">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="一棵树">
-<meta property="og:description" content="我只想做一棵树，随风摇摆枝叶繁茂">
+<meta property="og:description" content="一棵树的喃喃细语">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一棵树">
-<meta name="twitter:description" content="我只想做一棵树，随风摇摆枝叶繁茂">
+<meta name="twitter:description" content="一棵树的喃喃细语">
 
 
 
@@ -153,7 +153,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">一日就是一生</p>
+  <p class="site-subtitle">勤学似春起之苗，不见其增，日有所长</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -239,8 +239,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/17/collectionview_拖拽移动/" itemprop="url">
-                  未命名
+                <a class="post-title-link" href="/2016/08/17/collectionview_Drag/" itemprop="url">
+                  CollectionView 拖拽移动
                 </a>
               
             
@@ -264,8 +264,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/17/collectionview_拖拽移动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/collectionview_拖拽移动/" itemprop="commentsCount"></span>
+                <a href="/2016/08/17/collectionview_Drag/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/collectionview_Drag/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -275,7 +275,7 @@
 
           
           
-             <span id="/2016/08/17/collectionview_拖拽移动/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/08/17/collectionview_Drag/" class="leancloud_visitors" data-flag-title="CollectionView 拖拽移动">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -299,8 +299,7 @@
       
         
           
-            <p>####CollectionView 拖拽移动</p>
-<p>######iOS9新特性，collectionView的退拽</p>
+            <p>iOS9新特性，collectionView的退拽</p>
 <ul>
 <li>创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。</li>
 </ul>
@@ -332,9 +331,9 @@ return _collectionView;
 <pre><code>- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 return _data.count;
 }
-</code></pre><p>‘’’</p>
-<p>‘’’</p>
-<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
 MoveCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identity forIndexPath:indexPath];
 cell.img = _data[indexPath.row];
@@ -348,7 +347,7 @@ return cell;
 <pre><code>- (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath
 </code></pre><p>‘’’</p>
 <p>‘’’更新移动过程的位置</p>
-<pre><code>- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition
+<pre><code>- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition    
 </code></pre><p>‘’’</p>
 <p>‘’’结束移动的时候调用此方法，collectionView 会响应相应的datasource方法，collectionView:moveItemAtIndexPath:toIndexPath:  我们可以在这个方法中将移动的数据源，与目标数据源交互位置。</p>
 <pre><code>- (void)endInteractiveMovement
@@ -447,7 +446,7 @@ switch (longPress.state) {
 </ul>
 <p>‘’’在开始移动时会调用此代理方法，</p>
 <pre><code>- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
-//如果都可以移动，直接就返回YES ,不能移动的返回NO
+//根据indexpath判断单元格是否可以移动，如果都可以移动，直接就返回YES ,不能移动的返回NO
 return YES;
 }    
 </code></pre><p>‘’’在移动结束的时候调用此代理方法</p>
@@ -643,8 +642,10 @@ switch (longPress.state) {
       
         
           
-            <p>##NSUserDefaults</p>
-<p>用户轻量级的<br>NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行同步。</p>
+            <p>NSUserDefaults</p>
+<ul>
+<li>用户轻量级的<br>NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行同步。</li>
+</ul>
 <ul>
 <li><p>存数据</p>
 <pre><code>  //获取NSUserDefaults 对象
@@ -853,7 +854,7 @@ nslog(@&quot;没有存储Kite用户这个数据&quot;);
                src="/images/FullSize.png"
                alt="yiKeShu" />
           <p class="site-author-name" itemprop="name">yiKeShu</p>
-          <p class="site-description motion-element" itemprop="description">我只想做一棵树，随风摇摆枝叶繁茂</p>
+          <p class="site-description motion-element" itemprop="description">一棵树的喃喃细语</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">

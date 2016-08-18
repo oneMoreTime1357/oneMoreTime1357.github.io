@@ -80,37 +80,37 @@
 
 
 
-<meta name="description" content="####CollectionView 拖拽移动
-######iOS9新特性，collectionView的退拽
+<meta name="description" content="iOS9新特性，collectionView的退拽
 
 创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
 
 ‘’’
 - (UICollectionView *)collectionView {
-if(_collec">
+if(_collectionView == nil) {
+    UIColle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一棵树">
-<meta property="og:url" content="http://yoursite.com/2016/08/17/collectionview_拖拽移动/index.html">
+<meta property="og:title" content="CollectionView 拖拽移动">
+<meta property="og:url" content="http://yoursite.com/2016/08/17/collectionview_Drag/index.html">
 <meta property="og:site_name" content="一棵树">
-<meta property="og:description" content="####CollectionView 拖拽移动
-######iOS9新特性，collectionView的退拽
+<meta property="og:description" content="iOS9新特性，collectionView的退拽
 
 创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
 
 ‘’’
 - (UICollectionView *)collectionView {
-if(_collec">
-<meta property="og:updated_time" content="2016-08-18T23:17:52.000Z">
+if(_collectionView == nil) {
+    UIColle">
+<meta property="og:updated_time" content="2016-08-18T23:40:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一棵树">
-<meta name="twitter:description" content="####CollectionView 拖拽移动
-######iOS9新特性，collectionView的退拽
+<meta name="twitter:title" content="CollectionView 拖拽移动">
+<meta name="twitter:description" content="iOS9新特性，collectionView的退拽
 
 创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。
 
 ‘’’
 - (UICollectionView *)collectionView {
-if(_collec">
+if(_collectionView == nil) {
+    UIColle">
 
 
 
@@ -128,7 +128,7 @@ if(_collec">
   };
 </script>
 
-  <title>  | 一棵树 </title>
+  <title> CollectionView 拖拽移动 | 一棵树 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -173,7 +173,7 @@ if(_collec">
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">一日就是一生</p>
+  <p class="site-subtitle">勤学似春起之苗，不见其增，日有所长</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -258,7 +258,7 @@ if(_collec">
             
             
               
-                
+                CollectionView 拖拽移动
               
             
           </h1>
@@ -281,8 +281,8 @@ if(_collec">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/17/collectionview_拖拽移动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/collectionview_拖拽移动/" itemprop="commentsCount"></span>
+                <a href="/2016/08/17/collectionview_Drag/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/collectionview_Drag/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -292,7 +292,7 @@ if(_collec">
 
           
           
-             <span id="/2016/08/17/collectionview_拖拽移动/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/08/17/collectionview_Drag/" class="leancloud_visitors" data-flag-title="CollectionView 拖拽移动">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -314,8 +314,7 @@ if(_collec">
       
 
       
-        <p>####CollectionView 拖拽移动</p>
-<p>######iOS9新特性，collectionView的退拽</p>
+        <p>iOS9新特性，collectionView的退拽</p>
 <ul>
 <li>创建collectionView，实现代理方法和Datasource，向collectionView 添加长按事件，如下这是我创建collectionView，注册的cell。</li>
 </ul>
@@ -347,9 +346,9 @@ return _collectionView;
 <pre><code>- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 return _data.count;
 }
-</code></pre><p>‘’’</p>
-<p>‘’’</p>
-<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
 MoveCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identity forIndexPath:indexPath];
 cell.img = _data[indexPath.row];
@@ -363,7 +362,7 @@ return cell;
 <pre><code>- (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath
 </code></pre><p>‘’’</p>
 <p>‘’’更新移动过程的位置</p>
-<pre><code>- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition
+<pre><code>- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition    
 </code></pre><p>‘’’</p>
 <p>‘’’结束移动的时候调用此方法，collectionView 会响应相应的datasource方法，collectionView:moveItemAtIndexPath:toIndexPath:  我们可以在这个方法中将移动的数据源，与目标数据源交互位置。</p>
 <pre><code>- (void)endInteractiveMovement
@@ -462,7 +461,7 @@ switch (longPress.state) {
 </ul>
 <p>‘’’在开始移动时会调用此代理方法，</p>
 <pre><code>- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
-//如果都可以移动，直接就返回YES ,不能移动的返回NO
+//根据indexpath判断单元格是否可以移动，如果都可以移动，直接就返回YES ,不能移动的返回NO
 return YES;
 }    
 </code></pre><p>‘’’在移动结束的时候调用此代理方法</p>
@@ -604,8 +603,8 @@ switch (longPress.state) {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/17/collectionview_拖拽移动/"
-           data-title="" data-url="http://yoursite.com/2016/08/17/collectionview_拖拽移动/">
+      <div class="ds-thread" data-thread-key="2016/08/17/collectionview_Drag/"
+           data-title="CollectionView 拖拽移动" data-url="http://yoursite.com/2016/08/17/collectionview_Drag/">
       </div>
     
   </div>
@@ -645,7 +644,7 @@ switch (longPress.state) {
                src="/images/FullSize.png"
                alt="yiKeShu" />
           <p class="site-author-name" itemprop="name">yiKeShu</p>
-          <p class="site-description motion-element" itemprop="description">我只想做一棵树，随风摇摆枝叶繁茂</p>
+          <p class="site-description motion-element" itemprop="description">一棵树的喃喃细语</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
