@@ -17,6 +17,8 @@
 
 
 
+  <meta name="keywords" content="OC," />
+
 
 
 
@@ -33,21 +35,18 @@
 
 
 <meta name="description" content="NSUserDefaults
-
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进">
+用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据存储 NSUserDefaults">
 <meta property="og:url" content="http://yoursite.com/2016/05/10/nsuserdefaults/index.html">
 <meta property="og:site_name" content="A-Dan">
 <meta property="og:description" content="NSUserDefaults
-
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进">
-<meta property="og:updated_time" content="2016-08-18T23:33:11.000Z">
+用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行">
+<meta property="og:updated_time" content="2017-02-18T09:55:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据存储 NSUserDefaults">
 <meta name="twitter:description" content="NSUserDefaults
-
-用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进">
+用户轻量级的NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.2.x" />
@@ -224,42 +223,33 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSUserDefaults"><span class="toc-text">NSUserDefaults</span></a></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        <p>NSUserDefaults</p>
-<ul>
+        <h2 id="NSUserDefaults"><a href="#NSUserDefaults" class="headerlink" title="NSUserDefaults"></a>NSUserDefaults</h2><ul>
 <li>用户轻量级的<br>NSUserDefaults对象是用来保存，恢复应用程序相关的偏好设置，配置数据等等。默认系统允许应用程序自定义它的行为去迎合用户的喜好。你可以在程序运行的时候从用户默认的数据库中读取程序的设置。同时NSUserDefaults的缓存避免了在每次读取数据时候都打开用户默认数据库的操作。可以通过调用synchronize方法来使内存中的缓存与用户默认系统进行同步。</li>
 </ul>
 <ul>
-<li><p>存数据</p>
-<pre><code>  //获取NSUserDefaults 对象
- NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-// 存数据，不需要设置路径，NSUserDefaults 将数据保存在preferrences目录下
-     [userDefaults setObject:@&quot;Jane&quot; forKey:@&quot;name&quot;];
-     [userDefaults setObject:@&quot;phone&quot; forKey:@&quot;1892233232&quot;];
-  // 立刻保存同步数据，（如果不写这句话，会在将来某个时间点将数据保存在preference目录下）
-  [userDefaults synchronize];
-</code></pre></li>
+<li>存数据<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">		<span class="comment">//获取NSUserDefaults 对象</span></span><br><span class="line"><span class="built_in">NSUserDefaults</span> *userDefaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line">      <span class="comment">// 存数据，不需要设置路径，NSUserDefaults 将数据保存在preferrences目录下</span></span><br><span class="line">[userDefaults setObject:<span class="string">@"Jane"</span> forKey:<span class="string">@"name"</span>];</span><br><span class="line">[userDefaults setObject:<span class="string">@"phone"</span> forKey:<span class="string">@"1892233232"</span>];</span><br><span class="line">    	<span class="comment">// 立刻保存同步数据，（如果不写这句话，会在将来某个时间点将数据保存在preference目录下）</span></span><br><span class="line">[userDefaults synchronize];</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <ul>
 <li><p>取数据</p>
-<pre><code>//获取NSUserDefaults对象
-NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    //读取数据
-    NSString *userName  = [userDefaults objectForKey:@&quot;name&quot;];
-    NSString *userPhone  = [userDefaults objectForKey:@&quot;phone&quot;];
-</code></pre></li>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">		<span class="comment">//获取NSUserDefaults对象</span></span><br><span class="line"><span class="built_in">NSUserDefaults</span> *userDefaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line">   		 <span class="comment">//读取数据</span></span><br><span class="line"><span class="built_in">NSString</span> *userName  = [userDefaults objectForKey:<span class="string">@"name"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *userPhone  = [userDefaults objectForKey:<span class="string">@"phone"</span>];</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>判断一个数据是否存储在NSUserDefaults 中</p>
-<pre><code>if ([userDefaults objectForKey:@&quot;Kite&quot;] == nil) {
-nslog(@&quot;没有存储Kite用户这个数据&quot;);
-}
-</code></pre></li>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([userDefaults objectForKey:<span class="string">@"Kite"</span>] == <span class="literal">nil</span>) &#123;</span><br><span class="line">    nslog(<span class="string">@"没有存储Kite用户这个数据"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>如果存储 key 相同，value 不同的数据，后面的数据会把前面的数据替换掉。 </p>
-<pre><code> //执行完这行代码，文件中存储的数据就是现在的心value
- [[NSUserDefaults standardUserDefaults] setObject:@&quot;phone&quot; forKey:@&quot;1877230212&quot;];
-[userDefaults synchronize];
-</code></pre></li>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> 		<span class="comment">//执行完这行代码，文件中存储的数据就是现在的心value</span></span><br><span class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:<span class="string">@"phone"</span> forKey:<span class="string">@"1877230212"</span>];</span><br><span class="line">[userDefaults synchronize];</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -313,6 +303,34 @@ nslog(@&quot;没有存储Kite用户这个数据&quot;);
 
     
 
+    
+      <footer class="post-footer">
+        <div class="post-tags">
+          
+            <a href="/tags/OC/">OC</a>
+          
+        </div>
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/21/三体读书笔记/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">三体读书笔记</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/07/oneDay/">
+        <span class="next-text nav-default">oneDay</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
     
   </article>
 
