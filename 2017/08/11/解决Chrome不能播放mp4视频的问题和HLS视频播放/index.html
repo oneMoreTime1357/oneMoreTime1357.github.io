@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="数据存储 NSUserDefaults"/>
+  <meta name="description" content="解决Chrome不能播放mp4视频的问题和HLS视频播放"/>
 
 
 
@@ -32,19 +32,16 @@
 <link rel="canonical" href="http://yikeshu.info/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/"/>
 
 
-<meta name="description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。
-想要查看视频的编码格式，最简单查看视频信息的方式是，在文">
+<meta name="description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据存储 NSUserDefaults">
+<meta property="og:title" content="解决Chrome不能播放mp4视频的问题和HLS视频播放">
 <meta property="og:url" content="http://yikeshu.info/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/index.html">
 <meta property="og:site_name" content="A-Dan">
-<meta property="og:description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。
-想要查看视频的编码格式，最简单查看视频信息的方式是，在文">
-<meta property="og:updated_time" content="2017-08-11T12:32:05.000Z">
+<meta property="og:description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。">
+<meta property="og:updated_time" content="2017-08-11T12:36:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据存储 NSUserDefaults">
-<meta name="twitter:description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。
-想要查看视频的编码格式，最简单查看视频信息的方式是，在文">
+<meta name="twitter:title" content="解决Chrome不能播放mp4视频的问题和HLS视频播放">
+<meta name="twitter:description" content="现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.2.x" />
@@ -91,7 +88,7 @@
 
 
 
-    <title> 数据存储 NSUserDefaults · A-Dan </title>
+    <title> 解决Chrome不能播放mp4视频的问题和HLS视频播放 · A-Dan </title>
   </head>
 
   <body>
@@ -208,7 +205,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          数据存储 NSUserDefaults
+          解决Chrome不能播放mp4视频的问题和HLS视频播放
         
       </h1>
 
@@ -231,8 +228,7 @@
 
     <div class="post-content">
       
-        <p>现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。</p>
-<p>想要查看视频的编码格式，最简单查看视频信息的方式是，在文件中选中视频点击右键查看简介或者详细信息，下面有一个栏信息是编解码器：标准的编码格式是H.264，如果不是这种格式，那很抱歉chrome加载不出来是正常的。</p>
+        <p>现在面临一个问题chrome中播放后缀名为.mp4的视频文件只有声音播放不出视频画面，上网查了一下才知道，MP4视频不是说后缀名以.mp4结尾的就是MP4视频，mp4视频还包括不同的编码格式，还有不同的扩展名，都可以统一定义成MP4文件，而chrome只支持标准的H.264方式的编码，所以如果视频编码格式不对，chrome还是加载不出来的。<br><a id="more"></a><br>想要查看视频的编码格式，最简单查看视频信息的方式是，在文件中选中视频点击右键查看简介或者详细信息，下面有一个栏信息是编解码器：标准的编码格式是H.264，如果不是这种格式，那很抱歉chrome加载不出来是正常的。</p>
 <p>为什么chrome只支持H264这种格式呢，而不支持所有的视频编码格式？查了一下大概是说，绝大部分的视频编码格式都是要付专利费的，Google已经买了H264编码格式，所以其他的就不买了，Firefox没有Google那么有钱不愿意买。不过它使用Flash，绝大部分的视频格式基本上可以通过Flash播放。</p>
 <p>而我司解决办法是，将MP4视频文件转码统一转成hls格式编码的视频，这种格式的视频后缀名是以.m3u8结尾的。</p>
 <h4 id="什么是HLS？"><a href="#什么是HLS？" class="headerlink" title="什么是HLS？"></a>什么是HLS？</h4><p>HTTP Live Streaming（简称HLS）是一个基于HTTP的视频流协议，由苹果公司实现，</p>
@@ -312,7 +308,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/"
-           data-title="数据存储 NSUserDefaults" data-url="http://yikeshu.info/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/">
+           data-title="解决Chrome不能播放mp4视频的问题和HLS视频播放" data-url="http://yikeshu.info/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/">
       </div>
     
   </div>
