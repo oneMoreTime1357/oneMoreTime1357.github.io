@@ -1,13 +1,14 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 理解JavaScript中的闭包 · MissYang</title><meta name="description" content="理解JavaScript中的闭包 - 杨小丹"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>杨小丹</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">理解JavaScript中的闭包</h1><div class="post-info">Aug 11, 2017</div><div class="post-content"><p>闭包并不复杂。学习和理解闭包的基础知识仅仅只需要10分钟。</p>
-<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><p>闭包是JavaScript的一部分，每个工程师都应该知道和理解闭包。今天的文章只是撇开闭包的表面，但是将会给你一个很好的思想，关于什么是闭包和它在JavaScript中是如何运行的。好了，接下来我们开始吧。</p>
-<p>我们先从书本中闭包的定义开始。</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 理解JavaScript中的闭包 · MissYang</title><meta name="description" content="理解JavaScript中的闭包 - 杨小丹"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>杨小丹</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">理解JavaScript中的闭包</h1><div class="post-info">Aug 11, 2017</div><div class="post-content"><p>闭包并不复杂。学习和理解闭包的基础知识仅仅只需要10分钟。</p>
+<h4 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h4><p>闭包是JavaScript的一部分，每个工程师都应该知道和理解闭包。今天的文章只是撇开闭包的表面，但是将会给你一个很好的思想，关于什么是闭包和它在JavaScript中是如何运行的。好了，接下来我们开始吧。</p>
+<p>我们先从书本中闭包的定义开始。<br><a id="more"></a></p>
 <h4 id="定义1"><a href="#定义1" class="headerlink" title="定义1"></a>定义1</h4><blockquote>
 <p>闭包是一个能访问父作用域的函数，即使此作用域关闭了。</p>
 </blockquote>
 <h4 id="定义2"><a href="#定义2" class="headerlink" title="定义2"></a>定义2</h4><blockquote>
 <p>闭包是一个函数和该函数被声明的词汇环境的组合。</p>
 </blockquote>
-<p>很好，但是这些真正的意思是什么？<br><a id="more"></a><br>首先你需要理解在JavaScript中的<strong>作用域</strong>，作用域实质上是变量在JavaScript中的生命周期。因此，当一个变量定义了一个大的作用域，这个变量会存活多久，那个方法在你的程序中会访问到它。</p>
+<p>很好，但是这些真正的意思是什么？</p>
+<p>首先你需要理解在JavaScript中的<strong>作用域</strong>，作用域实质上是变量在JavaScript中的生命周期。因此，当一个变量定义了一个大的作用域，这个变量会存活多久，那个方法在你的程序中会访问到它。</p>
 <p>让我们看一个例子。</p>
 <p>当你在JavaScript中创建一个函数，它可以访问创建在这个函数里面和外面的变量。</p>
 <p>变量创建在一个函数中也定义了这个变量。一个局部变量只能在这个被定义的函数里面访问到。在下面这个例子中，你将会看到如果我们尝试在这个函数外面打印<code>words</code>，它会输出错误信息。这是因为<code>words</code>是一个内部作用域。</p>
@@ -45,7 +46,7 @@
 <hr>
 <p>翻译原文链接：<a href="https://codeburst.io/understand-closures-in-javascript-d07852fa51e7" target="_blank" rel="noopener">https://codeburst.io/understand-closures-in-javascript-d07852fa51e7</a><br>翻译中有疏漏的地方，欢迎指正。</p>
 <p>校对：蹦蹦</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/" class="next">NEXT</a></div><div data-thread-key="2017/08/11/[译]理解JavaScript中的闭包/" data-title="理解JavaScript中的闭包" data-url="http://yikeshu.info/2017/08/11/[译]理解JavaScript中的闭包/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"6280987357357278000"};
+</div></article></div></main><footer><div class="paginator"><a href="/2018/01/17/start2018/" class="prev">PREV</a><a href="/2017/08/11/解决Chrome不能播放mp4视频的问题和HLS视频播放/" class="next">NEXT</a></div><div data-thread-key="2017/08/11/[译]理解JavaScript中的闭包/" data-title="理解JavaScript中的闭包" data-url="http://yikeshu.info/2017/08/11/[译]理解JavaScript中的闭包/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"6280987357357278000"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
