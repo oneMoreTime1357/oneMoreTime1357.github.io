@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yikeshu.info/"/>
-  <updated>2018-04-14T14:45:16.000Z</updated>
+  <updated>2018-04-18T14:22:39.000Z</updated>
   <id>http://yikeshu.info/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>添加Disqus评论</title>
+    <link href="http://yikeshu.info/2018/04/18/hexo%E9%85%8D%E7%BD%AEDisqus/"/>
+    <id>http://yikeshu.info/2018/04/18/hexo配置Disqus/</id>
+    <published>2018-04-18T12:18:59.573Z</published>
+    <updated>2018-04-18T14:22:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>首先第一步就是创建一个Disqus的账号，打开网站<a href="https://disqus.com/" target="_blank" rel="noopener">https://disqus.com/</a> 点击注册。使用邮箱注册但是还需要验证。<a id="more"></a></li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/login-disq.png" alt="login-disq"></p><ul><li>按着上面一步步走，下一步就到了一个选择项，咱们是想在hexo上安装Disqus所以，直接选择第二项“I want to install Disqus on my site”</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/select-site.png" alt="select-site"></p><ul><li>然后就到了这一步，创建一个新的站点</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/set-site.png" alt="set-site"></p><p><strong>注意：</strong>这个Website Name填写的是唯一ID，而且一经创建无法修改。所以要想好设置，免得以后还得修改。</p><ul><li>然后Next，就到了选择服务，一般的选择免费的就够用了，想扩大以后还可以扩充。</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/select-rang.png" alt="select-rang"></p><ul><li>跟着步骤走，到下一步选择平台，因为我们是用Hexo，而Hexo不属于上面的任何一个平台，所以直接选择没有找到平台，选择通用代码安装就可以了。</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/select-platform.png" alt="select-platfor"></p><ul><li>选择完成之后，这有两行script代码，将这个代码拷贝出来，找到自己的主题配置评论的位置，然后粘到下面就可以了。</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/set-code.png" alt="set-code"></p><ul><li>然后到了最后一步，设置这个站点的名字，和Url，就是你博客的地址的位置。点击完成设置，大工告成。</li></ul><p><img src="http://oybj22zxs.bkt.clouddn.com/complete-site.png" alt="complete-site"></p><p>如果展示上还有问题，那就需要看看hexo主题中设置的代码是否和自己站点的ID相同。<br>比较简单，只要按照上面一步步去做就能创建自己的评论系统了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;首先第一步就是创建一个Disqus的账号，打开网站&lt;a href=&quot;https://disqus.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://disqus.com/&lt;/a&gt; 点击注册。使用邮箱注册但是还需要验证。
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>setTimeout &amp; setInterval</title>
