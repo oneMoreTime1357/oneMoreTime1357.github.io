@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 《算法图解》 - 二分法查找 · MissYang</title><meta name="description" content="《算法图解》 - 二分法查找 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">《算法图解》 - 二分法查找</h1><div class="post-info">Apr 26, 2018</div><div class="post-content"><p><strong>算法</strong>是一组完成任务的指令。</p>
+<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p><strong>二分查找</strong>将查找的序列一分为二，从中间开始查找。<br>比如想在电话簿中查找以o开头的朋友的名字，你肯定不会从a开始查找，而是翻到中间从中间开始查找，像这种的就是二分查找。</p>
+<p><strong>二分查找</strong>是一种算法，其输入是一个有序的元素列表。如果要查找的元素包含在列表中，二分查找返回其位置；否则返回null。<br><a id="more"></a><br>使用二分查找每次能排除一半的数字。对于包含n个元素的列表，用二分查找最多需要log2n步，而简单查找最多需要n步。</p>
+<p><strong>对数</strong><br>对数运算是幂运算的逆运算<br>问“将多少个10相乘的结果为100” 答案是两个 10 * 10 = 100<br>因此log10 100 = 1。</p>
+<p>对数是幂运算的逆运算。<br>使用二分法查找时，最多需要检查log n个元素。如果列表包含8个元素，你最多需要检查3个元素，因为 log 8 = 3 （2^3 = 8）.如果列表包含1024个元素，你最多需要检查10个元素，因为 log 1024 = 10 （2^10 = 1024）</p>
+<p><strong>注意：</strong>仅当列表是有序的时候，二分查找才管用。</p>
+<p>二分法查找JS实现，查找元素的位置。想象一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let binarySearch = function (list, item) &#123;</span><br><span class="line">  // low height 表示要跟踪的最小和最大的元素位置索引</span><br><span class="line">  let low = 0;   </span><br><span class="line">  let height = list.length - 1;</span><br><span class="line"></span><br><span class="line">  while (low &lt;= height) &#123; // 要保证最小为1个数</span><br><span class="line">    // 取出元素中间位置的索引，向下取整</span><br><span class="line">    let midIndex = Math.floor((low + height) / 2);</span><br><span class="line">    let guss = list[midIndex];</span><br><span class="line">    if (guss === item) &#123; // 获取元素进行比较，相等则返回目标元素</span><br><span class="line">      return midIndex;</span><br><span class="line">    &#125; else if (guss &gt; item) &#123; // 猜大了，缩小范围</span><br><span class="line">      height = midIndex - 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      low = midIndex + 1; // 猜小了</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>二分法查找的运行时间是O(logn) 对数时间</li>
+</ul>
+<h4 id="大O表示法"><a href="#大O表示法" class="headerlink" title="大O表示法"></a>大O表示法</h4><p>仅知道算法需要多长时间才能运行完毕还不够，还需要知道运行时间如何随着列表增长而增加。<br>大o表示法指出了算法有多快。<br><strong>大O表示法让你能够比较操作数，它指出了算法运行时间的增速。</strong><br>未检查长度为n的列表，二分查找需要执行log n次操作。使用大O表示法，这个运行时间怎么表示呢？O(log n)</p>
+<ul>
+<li>大O表示法指出了最糟糕情况下的运行时间<br>简单查找的运行时间为O(n)</li>
+</ul>
+<p><strong>5种常用的大O运行时间</strong></p>
+<ul>
+<li>O(log n)也叫对数时间，这样的算法包括二分查找。</li>
+<li>O(n),也叫线性时间，这样的算法包括简单查找。</li>
+<li>O(n * log n)，这样的算法包括快速排序，一种速度较快的排序算法。</li>
+<li>O(n^2)，这样的算法包括选择排序–一种速度较慢的排序算法。</li>
+<li>O(n!)，这样的算法 一种非常慢的算法。</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>算法的速度指的并非时间，而是操作数的增速。</li>
+<li>谈论算法的速度时，我们说的是随着输入的增加，其运行时间将以什么样的速度增加。</li>
+<li>算法的运行时间用大O表示法表示</li>
+<li>O(log n)比O(n)快，当需要搜索的元素越多时，前者比后者快得越多。</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/18/hexo配置Disqus/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
+var disqus_identifier = '2018/04/26/算法图解/';
+var disqus_title = '《算法图解》 - 二分法查找';
+var disqus_url = 'http://yikeshu.info/2018/04/26/算法图解/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//http-yikeshu-info.disqus.com/count.js" async></script><div class="copyright"><p>© 2017 - 2018 <a href="http://yikeshu.info">Sunny Yang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/oneMoreTime1357/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
