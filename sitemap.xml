@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yikeshu.info/2018/10/17/Promise-all-handle-error/</loc>
+    
+    <lastmod>2018-10-17T11:07:36.281Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yikeshu.info/2018/10/17/js-%E8%A1%A5%E9%9B%B6%E7%9A%84%E6%96%B9%E6%B3%95/</loc>
+    
+    <lastmod>2018-10-17T11:05:28.167Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yikeshu.info/2018/10/17/web-script-link-load/</loc>
+    
+    <lastmod>2018-10-17T11:05:23.744Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yikeshu.info/2018/04/03/CSS%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/</loc>
+    
+    <lastmod>2018-10-17T06:44:06.072Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yikeshu.info/2018/09/09/2018-9-9-console/</loc>
     
     <lastmod>2018-09-09T13:31:57.226Z</lastmod>
@@ -37,6 +65,13 @@
   </url>
   
   <url>
+    <loc>http://yikeshu.info/2017/08/11/%5B%E8%AF%91%5D%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/</loc>
+    
+    <lastmod>2018-04-26T12:37:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yikeshu.info/2018/04/18/hexo%E9%85%8D%E7%BD%AEDisqus/</loc>
     
     <lastmod>2018-04-18T14:22:39.000Z</lastmod>
@@ -44,23 +79,9 @@
   </url>
   
   <url>
-    <loc>http://yikeshu.info/2017/08/11/%5B%E8%AF%91%5D%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/</loc>
-    
-    <lastmod>2018-04-14T14:45:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yikeshu.info/2018/04/14/setTimeout-setInterval/</loc>
     
     <lastmod>2018-04-14T14:45:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yikeshu.info/2018/04/03/CSS%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/</loc>
-    
-    <lastmod>2018-04-03T05:24:01.000Z</lastmod>
     
   </url>
   
