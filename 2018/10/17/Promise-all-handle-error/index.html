@@ -3,25 +3,79 @@
 <p>要想理解<code>Promise.all()</code>的机制请看上一篇《理解promise》中的Promise.All示例</p>
 <p>那下面说说如何做才能做到promise.all中即使一个promise程序reject，promise.all依然能把其他数据正确返回。</p>
 <p><strong>首先我们先创建一个resolve和reject的promise函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const promiseResove = (promiseResolveSecond = function(n=0)&#123;</span><br><span class="line">    return new Promise(function(resolve, reject)&#123;</span><br><span class="line">        setTimeout(function() &#123;</span><br><span class="line">            resolve(&#123;</span><br><span class="line">                resolveAfterSeconds: n</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, n * 100);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const promiseReject = (promiseRejectSecond = function(n=0) &#123;</span><br><span class="line">    return new Promise(function(resolve, reject) &#123;</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">            reject(&#123;</span><br><span class="line">                rejectAfterSeconds: n</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, n * 100)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><strong>使用上面的函数创建一个所有结果能正确返回的promise.all程序</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var promiseArray = []</span><br><span class="line">promiseArray.push(promiseResove(1))</span><br><span class="line">promiseArray.push(promiseResove(3))</span><br><span class="line">promiseArray.push(promiseResove(2))</span><br><span class="line"></span><br><span class="line">var handlePromise = Promise.all(promiseArray)</span><br><span class="line">handlePromise.then(function(values) &#123;</span><br><span class="line">    console.log(&apos;all promise are resolved&apos;, values)</span><br><span class="line">&#125;).catch(function(reason) &#123;</span><br><span class="line">    console.log(&apos;promise reject failed reason&apos;, reason)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>const promiseResove = (promiseResolveSecond = function(n=0){
+    return new Promise(function(resolve, reject){
+        setTimeout(function() {
+            resolve({
+                resolveAfterSeconds: n
+            })
+        }, n * 100);
+    })
+})
+
+const promiseReject = (promiseRejectSecond = function(n=0) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function () {
+            reject({
+                rejectAfterSeconds: n
+            })
+        }, n * 100)
+    })
+})
+</code></pre><p><strong>使用上面的函数创建一个所有结果能正确返回的promise.all程序</strong></p>
+<pre><code>var promiseArray = []
+promiseArray.push(promiseResove(1))
+promiseArray.push(promiseResove(3))
+promiseArray.push(promiseResove(2))
+
+var handlePromise = Promise.all(promiseArray)
+handlePromise.then(function(values) {
+    console.log(&#39;all promise are resolved&#39;, values)
+}).catch(function(reason) {
+    console.log(&#39;promise reject failed reason&#39;, reason)
+})
+</code></pre><ul>
 <li>执行结果如下<br><img src="http://oybj22zxs.bkt.clouddn.com/19_49_30__08_01_2018.jpg" alt="promise all resolve"></li>
 </ul>
 <p><strong>然后在创建一个拥有reject函数返回的promise</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var promiseArray = []</span><br><span class="line">promiseArray.push(promiseResove(1))</span><br><span class="line">promiseArray.push(promiseReject(3))</span><br><span class="line">promiseArray.push(promiseResove(2))</span><br><span class="line"></span><br><span class="line">var handlePromise = Promise.all(promiseArray)</span><br><span class="line">handlePromise.then(function(values) &#123;</span><br><span class="line">    console.log(&apos;all promise are resolved&apos;, values)</span><br><span class="line">&#125;).catch(function(reason) &#123;</span><br><span class="line">    console.log(&apos;promise reject failed reason&apos;, reason)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>var promiseArray = []
+promiseArray.push(promiseResove(1))
+promiseArray.push(promiseReject(3))
+promiseArray.push(promiseResove(2))
+
+var handlePromise = Promise.all(promiseArray)
+handlePromise.then(function(values) {
+    console.log(&#39;all promise are resolved&#39;, values)
+}).catch(function(reason) {
+    console.log(&#39;promise reject failed reason&#39;, reason)
+})
+</code></pre><ul>
 <li>执行结果如下<br><img src="http://oybj22zxs.bkt.clouddn.com/19_53_41__08_01_2018.jpg" alt="promise all with reject"></li>
 </ul>
 <p>当<code>promise.all</code>中有一个promise执行失败返回reject时，promise.all直接返回执行失败的promise结果。</p>
 <p>但我们还想看到其他两个resolve的结果，所以后面用一个trick方法，来解决这个问题。</p>
 <p><strong>代码修改如下</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var promiseArray = []</span><br><span class="line">promiseArray.push(promiseResove(1))</span><br><span class="line">promiseArray.push(promiseReject(3))</span><br><span class="line">promiseArray.push(promiseResove(2))</span><br><span class="line"></span><br><span class="line">// 将传入promise.all的数组进行遍历，如果catch住reject结果，</span><br><span class="line">// 直接返回，这样就可以在最后结果中将所有结果都获取到</span><br><span class="line">var handlePromise = Promise.all(promiseArray.map(function(promiseItem) &#123;</span><br><span class="line">	return promiseItem.catch(function(err) &#123;</span><br><span class="line">    return err</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;))</span><br><span class="line">handlePromise.then(function(values) &#123;</span><br><span class="line">    console.log(&apos;all promise are resolved&apos;, values)</span><br><span class="line">&#125;).catch(function(reason) &#123;</span><br><span class="line">    console.log(&apos;promise reject failed reason&apos;, reason)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>和之前唯一的不同就是在promise数组添加了一个回调函数，当数组中有接口reject时，catch住结果直接返回，这样失败的结果也可以当做成功处理，所以在promise.all中我们可以监听到所有结果的返回，然后在针对不同的返回值进行处理。</p>
+<pre><code>var promiseArray = []
+promiseArray.push(promiseResove(1))
+promiseArray.push(promiseReject(3))
+promiseArray.push(promiseResove(2))
+
+// 将传入promise.all的数组进行遍历，如果catch住reject结果，
+// 直接返回，这样就可以在最后结果中将所有结果都获取到
+var handlePromise = Promise.all(promiseArray.map(function(promiseItem) {
+    return promiseItem.catch(function(err) {
+    return err
+  })
+}))
+handlePromise.then(function(values) {
+    console.log(&#39;all promise are resolved&#39;, values)
+}).catch(function(reason) {
+    console.log(&#39;promise reject failed reason&#39;, reason)
+})
+</code></pre><p>和之前唯一的不同就是在promise数组添加了一个回调函数，当数组中有接口reject时，catch住结果直接返回，这样失败的结果也可以当做成功处理，所以在promise.all中我们可以监听到所有结果的返回，然后在针对不同的返回值进行处理。</p>
 <hr>
 <p>参考链接<br><a href="https://stackoverflow.com/questions/30362733/handling-errors-in-promise-all" target="_blank" rel="noopener">https://stackoverflow.com/questions/30362733/handling-errors-in-promise-all</a></p>
-</div></article></div></main><footer><div class="paginator"><a href="/2018/10/17/web-script-link-load/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
+</div></article></div></main><footer><div class="paginator"><a href="/2018/10/27/2018-10-27-document-ScrollingElement/" class="prev">PREV</a><a href="/2018/10/17/web-script-link-load/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
 var disqus_identifier = '2018/10/17/Promise-all-handle-error/';
 var disqus_title = 'Promise.all 处理error';
 var disqus_url = 'http://yikeshu.info/2018/10/17/Promise-all-handle-error/';

@@ -1,30 +1,263 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 解锁 Vue多页面应用 · MissYang</title><meta name="description" content="解锁 Vue多页面应用 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">解锁 Vue多页面应用</h1><div class="post-info">Jul 14, 2018</div><div class="post-content"><p>大部分使用Vue是构建单页面应用，但有时候我们也需要多页面应用，比如手机端的H5页面，可能这块需要一个H5页，另一块需要一个H5活动页，彼此相互独立，根本就没有什么关联，这时候还使用单页面应用增加了页面加载的速度，而且打包了一大堆和本页面无关的代码，增加了页面响应时间。</p>
 <a id="more"></a>
-<p><strong>准备工作：</strong><br>使用vue-cli构建工具，添加项目。<br>最近vue-cli发布了最新版本v3.0.0，如果使用最新版本的脚手架，就不会暴露出webpack的一些配置文件，没办法自定义了，所以本次配置多页面构建还是使用的Vue CLI 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-cli</span><br><span class="line"></span><br><span class="line">vue init webpack vue-mutile-page</span><br></pre></td></tr></table></figure></p>
-<p>使用此模板创建的vue项目，集成的是webpack3，现在webpack已经升级到4了，暂时先按照模板来使用webpack3吧，先把架子搭好，后期想升级到最新也是可以的。</p>
-<h4 id="单页面应用打包之后dist目录"><a href="#单页面应用打包之后dist目录" class="headerlink" title="单页面应用打包之后dist目录"></a>单页面应用打包之后dist目录</h4><p>直接使用模板创建的项目是单页面应用的，配置文件都是写好的，所以我们可以直接执行命令打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
-<p>打包完成之后会生成dist目录，只生成一个入口文件index.html，然后static中有打包好的js和css文件.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── dist</span><br><span class="line">|    ├── index.html</span><br><span class="line">|    └── static</span><br><span class="line">|       ├── css</span><br><span class="line">|       └── js</span><br></pre></td></tr></table></figure></p>
-<h2 id="多页面应用"><a href="#多页面应用" class="headerlink" title="多页面应用"></a>多页面应用</h2><p>上面是常见的单页面应用打包之后的目录，那多页面打包之后应该是什么样的呢？</p>
+<p><strong>准备工作：</strong><br>使用vue-cli构建工具，添加项目。<br>最近vue-cli发布了最新版本v3.0.0，如果使用最新版本的脚手架，就不会暴露出webpack的一些配置文件，没办法自定义了，所以本次配置多页面构建还是使用的Vue CLI 2</p>
+<pre><code>npm install -g vue-cli
+
+vue init webpack vue-mutile-page
+</code></pre><p>使用此模板创建的vue项目，集成的是webpack3，现在webpack已经升级到4了，暂时先按照模板来使用webpack3吧，先把架子搭好，后期想升级到最新也是可以的。</p>
+<h4 id="单页面应用打包之后dist目录"><a href="#单页面应用打包之后dist目录" class="headerlink" title="单页面应用打包之后dist目录"></a>单页面应用打包之后dist目录</h4><p>直接使用模板创建的项目是单页面应用的，配置文件都是写好的，所以我们可以直接执行命令打包</p>
+<pre><code>npm run dev
+</code></pre><p>打包完成之后会生成dist目录，只生成一个入口文件index.html，然后static中有打包好的js和css文件.</p>
+<pre><code>├── dist
+|    ├── index.html
+|    └── static
+|       ├── css
+|       └── js
+</code></pre><h2 id="多页面应用"><a href="#多页面应用" class="headerlink" title="多页面应用"></a>多页面应用</h2><p>上面是常见的单页面应用打包之后的目录，那多页面打包之后应该是什么样的呢？</p>
 <p>多页面应用就意味着有多个页面，单页面打包之后只生成一个html文件，这个文件就是项目的入口文件，多页面也就是说每个页面都应该有一个自己的html文件，页面和页面之间是相互独立的，那在打包之后dist目录应该生成每个页面的html文件。比如我有page1和page2，dist目录中应该生成下面的结构，各自的页面名称对应各自的html文件。那要怎么做到呢，请看下文分解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├── dist</span><br><span class="line">|    ├── page1.html</span><br><span class="line">|    ├── page1.html</span><br><span class="line">|    └── static</span><br><span class="line">|       ├── css</span><br><span class="line">|       │   </span><br><span class="line">|       └── js</span><br><span class="line">|</span><br></pre></td></tr></table></figure>
-<h3 id="改写项目目录"><a href="#改写项目目录" class="headerlink" title="改写项目目录"></a>改写项目目录</h3><p>想要搭建多页面的应用，首先要改写刚刚生成的项目目录结构。</p>
-<p>下面是我修改之后的目录结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── .babelrc</span><br><span class="line">├── .editorconfig</span><br><span class="line">├── .eslintignore</span><br><span class="line">├── .eslintrc.js</span><br><span class="line">├── .gitignore</span><br><span class="line">├── .postcssrc.js</span><br><span class="line">├── README.md</span><br><span class="line">├── build</span><br><span class="line">│   ├── build.js</span><br><span class="line">│   ├── check-versions.js</span><br><span class="line">│   ├── utils.js</span><br><span class="line">│   ├── vue-loader.conf.js</span><br><span class="line">│   ├── webpack.base.conf.js</span><br><span class="line">│   ├── webpack.dev.conf.js</span><br><span class="line">│   └── webpack.prod.conf.js</span><br><span class="line">├── config</span><br><span class="line">│   ├── dev.env.js</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   ├── prod.env.js</span><br><span class="line">│   └── test.env.js</span><br><span class="line">├── package.json</span><br><span class="line">├── src</span><br><span class="line">│   ├── assets</span><br><span class="line">│   │   └── logo.png</span><br><span class="line">│   ├── components</span><br><span class="line">│   │   └── HelloWorld.vue</span><br><span class="line">│   └── pages</span><br><span class="line">│       ├── page1</span><br><span class="line">│       │   ├── App.vue</span><br><span class="line">│       │   ├── index.ejs</span><br><span class="line">│       │   └── index.js</span><br><span class="line">│       └── page2</span><br><span class="line">│           ├── App.vue</span><br><span class="line">│           ├── index.ejs</span><br><span class="line">│           └── index.js</span><br><span class="line">└── static</span><br></pre></td></tr></table></figure></p>
-<p>修改的点</p>
+<pre><code>├── dist
+|    ├── page1.html
+|    ├── page1.html
+|    └── static
+|       ├── css
+|       │   
+|       └── js
+|
+</code></pre><h3 id="改写项目目录"><a href="#改写项目目录" class="headerlink" title="改写项目目录"></a>改写项目目录</h3><p>想要搭建多页面的应用，首先要改写刚刚生成的项目目录结构。</p>
+<p>下面是我修改之后的目录结构</p>
+<pre><code>.
+├── .babelrc
+├── .editorconfig
+├── .eslintignore
+├── .eslintrc.js
+├── .gitignore
+├── .postcssrc.js
+├── README.md
+├── build
+│   ├── build.js
+│   ├── check-versions.js
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+├── config
+│   ├── dev.env.js
+│   ├── index.js
+│   ├── prod.env.js
+│   └── test.env.js
+├── package.json
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   └── HelloWorld.vue
+│   └── pages
+│       ├── page1
+│       │   ├── App.vue
+│       │   ├── index.ejs
+│       │   └── index.js
+│       └── page2
+│           ├── App.vue
+│           ├── index.ejs
+│           └── index.js
+└── static
+</code></pre><p>修改的点</p>
 <ol>
 <li>在src文件下创建pages目录，这是我们创建多页面放置的地方</li>
 <li>pages目录下是根据页面名称命名的文件夹，文件夹下包含三个文件，后缀为：<code>.vue .ejs .js</code>这三个文件，后缀为.vue 和 .js 的文件分别对应项目创建时的App.vue 和main.js文件，现在都放到页面文件中，.ejs文件对应的是根目录下的index.html文件，也就是项目的入口文件。</li>
 <li>把src下的App.vue 和main.js删除，根目录下的index.html也删除，因为这些都已经移到页面中了。</li>
 </ol>
-<p>项目目录整理好之后，那接下来我们就可以写配置文件了，配置文件的修改都在build目录下。更改的目录主要有下面这几个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── build</span><br><span class="line">│   ├── utils.js</span><br><span class="line">│   ├── webpack.base.conf.js</span><br><span class="line">│   ├── webpack.dev.conf.js</span><br><span class="line">│   └── webpack.prod.conf.js</span><br></pre></td></tr></table></figure></p>
-<h3 id="修改utils-js文件"><a href="#修改utils-js文件" class="headerlink" title="修改utils.js文件"></a>修改utils.js文件</h3><p>在utils文件中增加两个函数，一个是获取多页面路径作为entry文件的入口，另一个是生成页面多页面plugin的配置，废话不多说，上代码。</p>
-<p>首先需要安装一个node模块<a href="https://www.npmjs.com/package/glob" target="_blank" rel="noopener">glob</a>，glob可以读取相应后缀名的文件，便于检索出需要的文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev glob</span><br></pre></td></tr></table></figure></p>
-<p>在utils.js中添加如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">const glob = require(&apos;glob&apos;)</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">const merge = require(&apos;webpack-merge&apos;)</span><br><span class="line"></span><br><span class="line">const PAGE_PATH = path.resolve(__dirname, &apos;../src/pages&apos;)</span><br><span class="line"></span><br><span class="line">// 多页面入口文件配置</span><br><span class="line">exports.entries = function () &#123;</span><br><span class="line">//  读取pages下的 页面名称文件下的后缀为js的文件</span><br><span class="line">  var entryFiles = glob.sync(PAGE_PATH + &apos;/*/*.js&apos;)</span><br><span class="line">  var map = &#123;&#125;</span><br><span class="line">  entryFiles.forEach((filePath) =&gt; &#123;</span><br><span class="line">    // 因为后缀为js的文件名在index，而我们想获取的是</span><br><span class="line">    var pathArry = filePath.split(&apos;/&apos;)</span><br><span class="line">    var filename = pathArry[pathArry.length - 2]</span><br><span class="line">    map[filename] = filePath</span><br><span class="line">  &#125;)</span><br><span class="line">  // 整理成文件名为Key，路径为value的Object对象</span><br><span class="line">  return map</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 多页面输出配置</span><br><span class="line">exports.htmlPlugin = function () &#123;</span><br><span class="line">  let entryHtml = glob.sync(PAGE_PATH + &apos;/*/*.ejs&apos;)</span><br><span class="line">  let arr = []</span><br><span class="line">  entryHtml.forEach((filePath) =&gt; &#123;</span><br><span class="line">    let pathArry = filePath.split(&apos;/&apos;)</span><br><span class="line">    // 获取页面名</span><br><span class="line">    let filename = pathArry[pathArry.length - 2]</span><br><span class="line"></span><br><span class="line">    let conf = &#123;</span><br><span class="line">      template: filePath,</span><br><span class="line">      filename: filename + &apos;.html&apos;,</span><br><span class="line">      chunks: [&apos;manifest&apos;, &apos;vendor&apos;, filename],</span><br><span class="line">      inject: true</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (process.env.NODE_ENV === &apos;production&apos;) &#123;</span><br><span class="line">      conf = merge(conf, &#123;</span><br><span class="line">        minify: &#123;</span><br><span class="line">          removeComments: true,</span><br><span class="line">          collapseWhitespace: true,</span><br><span class="line">          removeAttributeQuotos: true</span><br><span class="line">        &#125;,</span><br><span class="line">        chunksSortMode: &apos;dependency&apos;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    arr.push(new HtmlWebpackPlugin(conf))</span><br><span class="line">  &#125;)</span><br><span class="line">  return arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="修改webpack-base-conf-js"><a href="#修改webpack-base-conf-js" class="headerlink" title="修改webpack.base.conf.js"></a>修改webpack.base.conf.js</h3><p>代码如下，修改的部分只有入口文件的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const utils = require(&apos;./utils&apos;)</span><br><span class="line">const config = require(&apos;../config&apos;)</span><br><span class="line">const vueLoaderConfig = require(&apos;./vue-loader.conf&apos;)</span><br><span class="line"></span><br><span class="line">function resolve (dir) &#123;</span><br><span class="line">  return path.join(__dirname, &apos;..&apos;, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const createLintingRule = () =&gt; (&#123;</span><br><span class="line">  test: /\.(js|vue)$/,</span><br><span class="line">  loader: &apos;eslint-loader&apos;,</span><br><span class="line">  enforce: &apos;pre&apos;,</span><br><span class="line">  include: [resolve(&apos;src&apos;), resolve(&apos;test&apos;)],</span><br><span class="line">  options: &#123;</span><br><span class="line">    formatter: require(&apos;eslint-friendly-formatter&apos;),</span><br><span class="line">    emitWarning: !config.dev.showEslintErrorsInOverlay</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  context: path.resolve(__dirname, &apos;../&apos;),</span><br><span class="line">  // 修改的部分=====开始</span><br><span class="line">  entry: utils.entries(),</span><br><span class="line">  // 修改的部分 === 结束</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: config.build.assetsRoot,</span><br><span class="line">    filename: &apos;[name].js&apos;,</span><br><span class="line">    publicPath: process.env.NODE_ENV === &apos;production&apos;</span><br><span class="line">      ? config.build.assetsPublicPath</span><br><span class="line">      : config.dev.assetsPublicPath</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [&apos;.js&apos;, &apos;.vue&apos;, &apos;.json&apos;],</span><br><span class="line">    alias: &#123;</span><br><span class="line">      &apos;vue$&apos;: &apos;vue/dist/vue.esm.js&apos;,</span><br><span class="line">      &apos;@&apos;: resolve(&apos;src&apos;),</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      ...(config.dev.useEslint ? [createLintingRule()] : []),</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.vue$/,</span><br><span class="line">        loader: &apos;vue-loader&apos;,</span><br><span class="line">        options: vueLoaderConfig</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.js$/,</span><br><span class="line">        loader: &apos;babel-loader&apos;,</span><br><span class="line">        include: [resolve(&apos;src&apos;), resolve(&apos;test&apos;), resolve(&apos;node_modules/webpack-dev-server/client&apos;)]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: utils.assetsPath(&apos;img/[name].[hash:7].[ext]&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: utils.assetsPath(&apos;media/[name].[hash:7].[ext]&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: utils.assetsPath(&apos;fonts/[name].[hash:7].[ext]&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  node: &#123;</span><br><span class="line">    // prevent webpack from injecting useless setImmediate polyfill because Vue</span><br><span class="line">    // source contains it (although only uses it if it&apos;s native).</span><br><span class="line">    setImmediate: false,</span><br><span class="line">    // prevent webpack from injecting mocks to Node native modules</span><br><span class="line">    // that does not make sense for the client</span><br><span class="line">    dgram: &apos;empty&apos;,</span><br><span class="line">    fs: &apos;empty&apos;,</span><br><span class="line">    net: &apos;empty&apos;,</span><br><span class="line">    tls: &apos;empty&apos;,</span><br><span class="line">    child_process: &apos;empty&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="webpack-dev-conf-js文件"><a href="#webpack-dev-conf-js文件" class="headerlink" title="webpack.dev.conf.js文件"></a>webpack.dev.conf.js文件</h3><p>完整代码比较多，只贴出了关键代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  new webpack.DefinePlugin(&#123;</span><br><span class="line">    &apos;process.env&apos;: require(&apos;../config/dev.env&apos;)</span><br><span class="line">  &#125;),</span><br><span class="line">  new webpack.HotModuleReplacementPlugin(),</span><br><span class="line">  new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.</span><br><span class="line">  new webpack.NoEmitOnErrorsPlugin(),</span><br><span class="line">  // https://github.com/ampedandwired/html-webpack-plugin</span><br><span class="line"></span><br><span class="line">  //-------- 注掉 配置中的 HtmlWebpackPlugin 这个插件---------------</span><br><span class="line"></span><br><span class="line"> // new HtmlWebpackPlugin(&#123;</span><br><span class="line">  //  filename: &apos;index.html&apos;,</span><br><span class="line">  //  template: &apos;index.html&apos;,</span><br><span class="line">  //  inject: true</span><br><span class="line"> // &#125;),</span><br><span class="line"></span><br><span class="line"> // ------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">  // copy custom static assets</span><br><span class="line">  new CopyWebpackPlugin([</span><br><span class="line">    &#123;</span><br><span class="line">      from: path.resolve(__dirname, &apos;../static&apos;),</span><br><span class="line">      to: config.dev.assetsSubDirectory,</span><br><span class="line">      ignore: [&apos;.*&apos;]</span><br><span class="line">    &#125;</span><br><span class="line">  ])</span><br><span class="line"></span><br><span class="line">  // 添加----------utils中我们写的另一个函数utils.htmlPlugin-----------</span><br><span class="line">].concat(utils.htmlPlugin())</span><br><span class="line">// ---------------------------------------</span><br></pre></td></tr></table></figure></p>
-<h3 id="webpack-prod-conf-js文件"><a href="#webpack-prod-conf-js文件" class="headerlink" title="webpack.prod.conf.js文件"></a>webpack.prod.conf.js文件</h3><p>生产环境的配置和开发环境一样，先注掉配置文件中的webpack插件HtmlWebpackPlugin的那段代码，然后在将utils中我们之前写的htmlplugin函数，生成的数组添加到plugin上。操作和上面webpack.dev.conf.js文件相同。</p>
+<p>项目目录整理好之后，那接下来我们就可以写配置文件了，配置文件的修改都在build目录下。更改的目录主要有下面这几个</p>
+<pre><code>├── build
+│   ├── utils.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+</code></pre><h3 id="修改utils-js文件"><a href="#修改utils-js文件" class="headerlink" title="修改utils.js文件"></a>修改utils.js文件</h3><p>在utils文件中增加两个函数，一个是获取多页面路径作为entry文件的入口，另一个是生成页面多页面plugin的配置，废话不多说，上代码。</p>
+<p>首先需要安装一个node模块<a href="https://www.npmjs.com/package/glob" target="_blank" rel="noopener">glob</a>，glob可以读取相应后缀名的文件，便于检索出需要的文件。</p>
+<pre><code>npm install --save-dev glob
+</code></pre><p>在utils.js中添加如下代码</p>
+<pre><code>const glob = require(&#39;glob&#39;)
+const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const merge = require(&#39;webpack-merge&#39;)
+
+const PAGE_PATH = path.resolve(__dirname, &#39;../src/pages&#39;)
+
+// 多页面入口文件配置
+exports.entries = function () {
+//  读取pages下的 页面名称文件下的后缀为js的文件
+  var entryFiles = glob.sync(PAGE_PATH + &#39;/*/*.js&#39;)
+  var map = {}
+  entryFiles.forEach((filePath) =&gt; {
+    // 因为后缀为js的文件名在index，而我们想获取的是
+    var pathArry = filePath.split(&#39;/&#39;)
+    var filename = pathArry[pathArry.length - 2]
+    map[filename] = filePath
+  })
+  // 整理成文件名为Key，路径为value的Object对象
+  return map
+}
+
+// 多页面输出配置
+exports.htmlPlugin = function () {
+  let entryHtml = glob.sync(PAGE_PATH + &#39;/*/*.ejs&#39;)
+  let arr = []
+  entryHtml.forEach((filePath) =&gt; {
+    let pathArry = filePath.split(&#39;/&#39;)
+    // 获取页面名
+    let filename = pathArry[pathArry.length - 2]
+
+    let conf = {
+      template: filePath,
+      filename: filename + &#39;.html&#39;,
+      chunks: [&#39;manifest&#39;, &#39;vendor&#39;, filename],
+      inject: true
+    }
+
+    if (process.env.NODE_ENV === &#39;production&#39;) {
+      conf = merge(conf, {
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotos: true
+        },
+        chunksSortMode: &#39;dependency&#39;
+      })
+    }
+    arr.push(new HtmlWebpackPlugin(conf))
+  })
+  return arr
+}
+</code></pre><h3 id="修改webpack-base-conf-js"><a href="#修改webpack-base-conf-js" class="headerlink" title="修改webpack.base.conf.js"></a>修改webpack.base.conf.js</h3><p>代码如下，修改的部分只有入口文件的配置</p>
+<pre><code>const path = require(&#39;path&#39;)
+const utils = require(&#39;./utils&#39;)
+const config = require(&#39;../config&#39;)
+const vueLoaderConfig = require(&#39;./vue-loader.conf&#39;)
+
+function resolve (dir) {
+  return path.join(__dirname, &#39;..&#39;, dir)
+}
+
+const createLintingRule = () =&gt; ({
+  test: /\.(js|vue)$/,
+  loader: &#39;eslint-loader&#39;,
+  enforce: &#39;pre&#39;,
+  include: [resolve(&#39;src&#39;), resolve(&#39;test&#39;)],
+  options: {
+    formatter: require(&#39;eslint-friendly-formatter&#39;),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+})
+
+module.exports = {
+  context: path.resolve(__dirname, &#39;../&#39;),
+  // 修改的部分=====开始
+  entry: utils.entries(),
+  // 修改的部分 === 结束
+  output: {
+    path: config.build.assetsRoot,
+    filename: &#39;[name].js&#39;,
+    publicPath: process.env.NODE_ENV === &#39;production&#39;
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  },
+  resolve: {
+    extensions: [&#39;.js&#39;, &#39;.vue&#39;, &#39;.json&#39;],
+    alias: {
+      &#39;vue$&#39;: &#39;vue/dist/vue.esm.js&#39;,
+      &#39;@&#39;: resolve(&#39;src&#39;),
+    }
+  },
+  module: {
+    rules: [
+      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.vue$/,
+        loader: &#39;vue-loader&#39;,
+        options: vueLoaderConfig
+      },
+      {
+        test: /\.js$/,
+        loader: &#39;babel-loader&#39;,
+        include: [resolve(&#39;src&#39;), resolve(&#39;test&#39;), resolve(&#39;node_modules/webpack-dev-server/client&#39;)]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: &#39;url-loader&#39;,
+        options: {
+          limit: 10000,
+          name: utils.assetsPath(&#39;img/[name].[hash:7].[ext]&#39;)
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: &#39;url-loader&#39;,
+        options: {
+          limit: 10000,
+          name: utils.assetsPath(&#39;media/[name].[hash:7].[ext]&#39;)
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: &#39;url-loader&#39;,
+        options: {
+          limit: 10000,
+          name: utils.assetsPath(&#39;fonts/[name].[hash:7].[ext]&#39;)
+        }
+      }
+    ]
+  },
+  node: {
+    // prevent webpack from injecting useless setImmediate polyfill because Vue
+    // source contains it (although only uses it if it&#39;s native).
+    setImmediate: false,
+    // prevent webpack from injecting mocks to Node native modules
+    // that does not make sense for the client
+    dgram: &#39;empty&#39;,
+    fs: &#39;empty&#39;,
+    net: &#39;empty&#39;,
+    tls: &#39;empty&#39;,
+    child_process: &#39;empty&#39;
+  }
+}
+</code></pre><h3 id="webpack-dev-conf-js文件"><a href="#webpack-dev-conf-js文件" class="headerlink" title="webpack.dev.conf.js文件"></a>webpack.dev.conf.js文件</h3><p>完整代码比较多，只贴出了关键代码</p>
+<pre><code>  plugins: [
+    new webpack.DefinePlugin({
+      &#39;process.env&#39;: require(&#39;../config/dev.env&#39;)
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    new webpack.NoEmitOnErrorsPlugin(),
+    // https://github.com/ampedandwired/html-webpack-plugin
+
+    //-------- 注掉 配置中的 HtmlWebpackPlugin 这个插件---------------
+
+   // new HtmlWebpackPlugin({
+    //  filename: &#39;index.html&#39;,
+    //  template: &#39;index.html&#39;,
+    //  inject: true
+   // }),
+
+   // ------------------------------------------------------------
+
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, &#39;../static&#39;),
+        to: config.dev.assetsSubDirectory,
+        ignore: [&#39;.*&#39;]
+      }
+    ])
+
+    // 添加----------utils中我们写的另一个函数utils.htmlPlugin-----------
+  ].concat(utils.htmlPlugin())
+  // ---------------------------------------
+</code></pre><h3 id="webpack-prod-conf-js文件"><a href="#webpack-prod-conf-js文件" class="headerlink" title="webpack.prod.conf.js文件"></a>webpack.prod.conf.js文件</h3><p>生产环境的配置和开发环境一样，先注掉配置文件中的webpack插件HtmlWebpackPlugin的那段代码，然后在将utils中我们之前写的htmlplugin函数，生成的数组添加到plugin上。操作和上面webpack.dev.conf.js文件相同。</p>
 <hr>
-<p>好了一切配置完成，现在就可以实验一下了，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
-<p>如果没什么问题的话就可以看到dist目录中生成，在文章开始我们设想的打包之后的页面结构。</p>
+<p>好了一切配置完成，现在就可以实验一下了，执行</p>
+<pre><code>npm run build
+</code></pre><p>如果没什么问题的话就可以看到dist目录中生成，在文章开始我们设想的打包之后的页面结构。</p>
 <p>GitHub项目地址：<a href="https://github.com/oneMoreTime1357/Vue-multiple-page" target="_blank" rel="noopener">Vue-multiple-page</a></p>
 <p><strong>参考资料</strong>：</p>
 <p>官网Entry Points介绍<br><a href="https://webpack.js.org/concepts/entry-points/#src/components/Sidebar/Sidebar.jsx" target="_blank" rel="noopener">https://webpack.js.org/concepts/entry-points/#src/components/Sidebar/Sidebar.jsx</a></p>

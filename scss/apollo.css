@@ -442,7 +442,7 @@ header {
 .home.post-list {
   margin: 2em 0; }
   .home.post-list .post-list-item {
-    padding: 1em 0 2em;
+    padding: 1em 0 1.5em;
     border-bottom: 1px solid #ddd; }
     .home.post-list .post-list-item:last-child {
       border-bottom: 0px; }
@@ -484,7 +484,7 @@ header {
 
 .post-block .post-info {
   color: #7f8c8d;
-  margin: 1.2em 0; }
+  margin: 0em 0 1em; }
   .post-block .post-info span {
     margin-left: 0.5rem; }
   .post-block .post-info a.post-from {

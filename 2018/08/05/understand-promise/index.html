@@ -1,20 +1,46 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 理解Promise - 学习 · MissYang</title><meta name="description" content="理解Promise - 学习 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">理解Promise - 学习</h1><div class="post-info">Aug 5, 2018</div><div class="post-content"><p>JavaScript是同步编程语言，但是我们可以通过回调函数，使他看起来像异步编程语言。</p>
 <p>Promise为了解决什么？<br>Node.js用回调函数代替了事件，使异步编程在JavaScript上更加流行。但当更多程序开始使用异步编程时，事件和回调函数却不能满足开发者想要做的所有事情，它们还不够强大，而Promise就是这些问题的解决方案。<br><a id="more"></a><br><strong><a href="https://hackernoon.com/understanding-promises-in-javascript-13d99df067c1" target="_blank" rel="noopener">Understanding promises in JavaScript</a></strong> 这篇文章描述了两个部分用于理解 promise，一是创建promise，二是处理promise。本文是在学习此文的基础上加入了一些自己的理解，大部分代码都是学习原文作者。原文内容更丰富，建议阅读原文。</p>
 <p>作者在帮助理解Promise上举了很多例子，在阅读的过程中最好打开浏览器的控制台，边看边执行代码验证结果，帮助理解。而且例子贴近生活更便于理解。</p>
-<h2 id="创建Promise"><a href="#创建Promise" class="headerlink" title="创建Promise"></a>创建Promise</h2><p>创建一个promise标准的写法如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Promise( /* executor */ function(resolve, reject) &#123; ... &#125; );</span><br></pre></td></tr></table></figure></p>
-<p>这个构造函数接收一个执行函数，执行函数接收两个参数<code>resolve</code>和<code>reject</code>。Promise一般用于处理一些简单的异步程序和代码块，比如文件程序，API调用，DB调用，IO操作。异步程序初始化是在 executor 这个函数中初始化。如果这个异步程序执行成功，使用resolve函数返回，如果执行失败使用 reject函数返回。</p>
+<h2 id="创建Promise"><a href="#创建Promise" class="headerlink" title="创建Promise"></a>创建Promise</h2><p>创建一个promise标准的写法如下</p>
+<pre><code>new Promise( /* executor */ function(resolve, reject) { ... } );
+</code></pre><p>这个构造函数接收一个执行函数，执行函数接收两个参数<code>resolve</code>和<code>reject</code>。Promise一般用于处理一些简单的异步程序和代码块，比如文件程序，API调用，DB调用，IO操作。异步程序初始化是在 executor 这个函数中初始化。如果这个异步程序执行成功，使用resolve函数返回，如果执行失败使用 reject函数返回。</p>
 <p>下面创建一个简单的promise函数，在浏览器控制台执行下面的程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var keepsHisWord;</span><br><span class="line">keepsHisWord = true;</span><br><span class="line">promise1 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">  if (keepsHisWord) &#123;</span><br><span class="line">    resolve(&quot;The man likes to keep his word&quot;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    reject(&quot;The man doesnt want to keep his word&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(promise1);</span><br></pre></td></tr></table></figure>
-<p>想知道结果，请把代码复制下来在浏览器控制台执行看看吧。</p>
+<pre><code>var keepsHisWord;
+keepsHisWord = true;
+promise1 = new Promise(function(resolve, reject) {
+  if (keepsHisWord) {
+    resolve(&quot;The man likes to keep his word&quot;);
+  } else {
+    reject(&quot;The man doesnt want to keep his word&quot;);
+  }
+});
+console.log(promise1);
+</code></pre><p>想知道结果，请把代码复制下来在浏览器控制台执行看看吧。</p>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*ByDQ6-tTp2TvHIh4R_P6xw.png" alt=""></p>
 <p>由于这个promise立马就执行了，我们没有办法在这个promise中检查初始化情况。所以让我们再重新创建一个promise，这个promise需要点时间去resolve。简单的办法就是使用 setTimeout函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      message: &quot;The man likes to keep his word&quot;,</span><br><span class="line">      code: &quot;aManKeepsHisWord&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, 10 * 1000);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(promise2);</span><br></pre></td></tr></table></figure>
-<p>上方的代码只是创建了一个promise，在10秒钟之后无条件的 resolve。So,我们可以检查这个状况的promise，知道它resolve为止。<br><img src="https://cdn-images-1.medium.com/max/1600/1*6GX_rHpGa3HXcYiHm9Vy6g.png" alt=""></p>
+<pre><code>promise2 = new Promise(function(resolve, reject) {
+  setTimeout(function() {
+    resolve({
+      message: &quot;The man likes to keep his word&quot;,
+      code: &quot;aManKeepsHisWord&quot;
+    });
+  }, 10 * 1000);
+});
+console.log(promise2);
+</code></pre><p>上方的代码只是创建了一个promise，在10秒钟之后无条件的 resolve。So,我们可以检查这个状况的promise，知道它resolve为止。<br><img src="https://cdn-images-1.medium.com/max/1600/1*6GX_rHpGa3HXcYiHm9Vy6g.png" alt=""></p>
 <p>10秒钟过后，promise执行了resolve 方法，<code>PromiseStatus</code>和<code>PromiseValue</code>因此被更新。你可以看到，我们可以传递一个JSON对象代替一个简单string来更新resolve函数。因此我们也可以传递其他的数据到resolve函数中。</p>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*n6s4IswZBVUIHc2K3apONA.png" alt=""></p>
 <p>接下来让我们看看promise中的reject函数，简单修改上面的函数，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">keepsHisWord = false;</span><br><span class="line">promise3 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">  if (keepsHisWord) &#123;</span><br><span class="line">    resolve(&quot;The man likes to keep his word&quot;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    reject(&quot;The man doesn&apos;t want to keep his word&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(promise3);</span><br></pre></td></tr></table></figure>
-<p>至此，我们创建了一个无法处理的reject promise，chrome浏览器将会显示错误提示。你可以先忽略，我们接下来会解释。<br><img src="https://cdn-images-1.medium.com/max/1600/1*rP1Qk-5xOz4c1MJmoNT0Bw.png" alt=""></p>
+<pre><code>keepsHisWord = false;
+promise3 = new Promise(function(resolve, reject) {
+  if (keepsHisWord) {
+    resolve(&quot;The man likes to keep his word&quot;);
+  } else {
+    reject(&quot;The man doesn&#39;t want to keep his word&quot;);
+  }
+});
+console.log(promise3);
+</code></pre><p>至此，我们创建了一个无法处理的reject promise，chrome浏览器将会显示错误提示。你可以先忽略，我们接下来会解释。<br><img src="https://cdn-images-1.medium.com/max/1600/1*rP1Qk-5xOz4c1MJmoNT0Bw.png" alt=""></p>
 <p>如我们所看到的<code>PromiseStatus</code>有三个不同的值。<code>pending</code> <code>resolved</code> 和 <code>rejected</code>，当promise创建<code>PromiseStatus</code> 将会在<code>pending</code>状态下，此时的<code>PromiseValue</code>是<code>undefined</code> 知道promise <code>resolved</code>或者<code>rejected</code>。当一个promise在<code>resolved</code>或者<code>rejected</code>状态下，这个promise可以说是<code>settled</code>已经被解决。所以一个promise的状态通常是从 pending状态 到 settled状态。</p>
 <p>上面我们已经知道了怎么创建promise，接下来我们将要学习如何使用和处理promise，手把手教你怎么理解<code>Promise</code>对象。</p>
 <h2 id="理解promise对象"><a href="#理解promise对象" class="headerlink" title="理解promise对象"></a>理解promise对象</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">Promis在MDN文档</a>中解释如下</p>
@@ -23,66 +49,252 @@
 </blockquote>
 <p>Promise 对象有静态方法和原型方法，静态方法在Promise对象中可以被申请为独立的。记住不管是普通的方法还是原型方法，只要返回一个Promise对象，就会变得简单。</p>
 <h3 id="原型方法"><a href="#原型方法" class="headerlink" title="原型方法"></a>原型方法</h3><p>promise有三个原型方法。所有的这些方法，处理不同的状态。正如上文的例子当一个Promise被创建，最开始是pending状态，下面的三个方法将会被执行，不管返回的是 fulfilled 或者 rejected 都会被解决</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise.prototype.catch(onRejected)</span><br><span class="line">Promise.prototype.then(onFulfilled, onRejected)</span><br><span class="line">Promise.prototype.finally(onFinally)</span><br></pre></td></tr></table></figure>
-<p>下面这张图片展示了 .then .catch方法。如果返回一个Promise，正如下面这张图片所示，会引起连锁反应。<br><img src="https://cdn-images-1.medium.com/max/1600/1*0mBlni5vsYZE2wFzfVv8EA.png" alt=""></p>
+<pre><code>Promise.prototype.catch(onRejected)
+Promise.prototype.then(onFulfilled, onRejected)
+Promise.prototype.finally(onFinally)
+</code></pre><p>下面这张图片展示了 .then .catch方法。如果返回一个Promise，正如下面这张图片所示，会引起连锁反应。<br><img src="https://cdn-images-1.medium.com/max/1600/1*0mBlni5vsYZE2wFzfVv8EA.png" alt=""></p>
 <p>下面作者举了一个例子，来帮助理解Promise。</p>
 <p>例如：你是个学生，想让你妈妈给你买个手机，她说：“我将在这个月底给你买个手机”</p>
 <p>让我们看看这个在JavaScript中怎么实现，如果这个承诺在月底执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var momsPromise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">  momsSavings = 20000;</span><br><span class="line">  priceOfPhone = 60000;</span><br><span class="line">  if (momsSavings &gt; priceOfPhone) &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      brand: &quot;iphone&quot;,</span><br><span class="line">      model: &quot;6s&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    reject(&quot;We donot have enough savings. Let us save some more money.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">momsPromise.then(function(value) &#123;</span><br><span class="line">  console.log(&quot;Hurray I got this phone as a gift &quot;, JSON.stringify(value));</span><br><span class="line">&#125;);</span><br><span class="line">momsPromise.catch(function(reason) &#123;</span><br><span class="line">  console.log(&quot;Mom coudn&apos;t buy me the phone because &quot;, reason);</span><br><span class="line">&#125;);</span><br><span class="line">momsPromise.finally(function() &#123;</span><br><span class="line">  console.log(</span><br><span class="line">    &quot;Irrespecitve of whether my mom can buy me a phone or not, I still love her&quot;</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>输出如下<br><img src="https://cdn-images-1.medium.com/max/1600/1*Ol16n8YEu5vKgVqh0pBbhg.png" alt=""></p>
+<pre><code>var momsPromise = new Promise(function(resolve, reject) {
+  momsSavings = 20000;
+  priceOfPhone = 60000;
+  if (momsSavings &gt; priceOfPhone) {
+    resolve({
+      brand: &quot;iphone&quot;,
+      model: &quot;6s&quot;
+    });
+  } else {
+    reject(&quot;We donot have enough savings. Let us save some more money.&quot;);
+  }
+});
+momsPromise.then(function(value) {
+  console.log(&quot;Hurray I got this phone as a gift &quot;, JSON.stringify(value));
+});
+momsPromise.catch(function(reason) {
+  console.log(&quot;Mom coudn&#39;t buy me the phone because &quot;, reason);
+});
+momsPromise.finally(function() {
+  console.log(
+    &quot;Irrespecitve of whether my mom can buy me a phone or not, I still love her&quot;
+  );
+});
+</code></pre><p>输出如下<br><img src="https://cdn-images-1.medium.com/max/1600/1*Ol16n8YEu5vKgVqh0pBbhg.png" alt=""></p>
 <p>如果我们改变 <code>momSavings</code>到200000，愿望达成，输出如下<br><img src="https://cdn-images-1.medium.com/max/1600/1*9PPksLxayz3373AxoYg4kA.png" alt=""></p>
 <p>我们模拟数据输出，这样我们就可以看到怎么有效的使用then和catch</p>
-<p> .then 可以同时标记onFulfilled，onRejected handlers，我们可以将它们写在一起，代替分开的写法，我们可以使用 .then处理两种情况，如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> momsPromise.then(</span><br><span class="line">  function(value) &#123;</span><br><span class="line">    console.log(&quot;Hurray I got this phone as a gift &quot;, JSON.stringify(value));</span><br><span class="line">  &#125;,</span><br><span class="line">  function(reason) &#123;</span><br><span class="line">    console.log(&quot;Mom coudn&apos;t buy me the phone because &quot;, reason);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p> 除了可读性强了一些，最好还是分开写吧。</p>
+<p> .then 可以同时标记onFulfilled，onRejected handlers，我们可以将它们写在一起，代替分开的写法，我们可以使用 .then处理两种情况，如下：</p>
+<pre><code> momsPromise.then(
+  function(value) {
+    console.log(&quot;Hurray I got this phone as a gift &quot;, JSON.stringify(value));
+  },
+  function(reason) {
+    console.log(&quot;Mom coudn&#39;t buy me the phone because &quot;, reason);
+  }
+);
+</code></pre><p> 除了可读性强了一些，最好还是分开写吧。</p>
 <p> 为了更好的理解Promise，让我们创建一个函数返回promise，将会随机的返回resolved或者rejected，这样我们就可以测试多种情况。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function getRandomNumber(start = 1, end = 10) &#123;</span><br><span class="line">  //works when both start,end are &gt;=1 and end &gt; start</span><br><span class="line">  return parseInt(Math.random() * end) % (end-start+1) + start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面将创建一返回promise的函数，使用随机函数，随机生成一个数，如果大于5将resolved，小于5返回 rejected，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">function getRandomNumber(start = 1, end = 10) &#123;</span><br><span class="line">  //works when both start and end are &gt;=1</span><br><span class="line">  return (parseInt(Math.random() * end) % (end - start + 1)) + start;</span><br><span class="line">&#125;</span><br><span class="line">var promiseTRRARNOSG = (promiseThatResolvesRandomlyAfterRandomNumnberOfSecondsGenerator = function() &#123;</span><br><span class="line">  return new Promise(function(resolve, reject) &#123;</span><br><span class="line">    let randomNumberOfSeconds = getRandomNumber(2, 10);</span><br><span class="line">    setTimeout(function() &#123;</span><br><span class="line">      let randomiseResolving = getRandomNumber(1, 10);</span><br><span class="line">      if (randomiseResolving &gt; 5) &#123;</span><br><span class="line">        resolve(&#123;</span><br><span class="line">          randomNumberOfSeconds: randomNumberOfSeconds,</span><br><span class="line">          randomiseResolving: randomiseResolving</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        reject(&#123;</span><br><span class="line">          randomNumberOfSeconds: randomNumberOfSeconds,</span><br><span class="line">          randomiseResolving: randomiseResolving</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, randomNumberOfSeconds * 1000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">var testProimse = promiseTRRARNOSG();</span><br><span class="line">testProimse.then(function(value) &#123;</span><br><span class="line">  console.log(&quot;Value when promise is resolved : &quot;, value);</span><br><span class="line">&#125;);</span><br><span class="line">testProimse.catch(function(reason) &#123;</span><br><span class="line">  console.log(&quot;Reason when promise is rejected : &quot;, reason);</span><br><span class="line">&#125;);</span><br><span class="line">// Let us loop through and create ten different promises using the function to see some variation. Some will be resolved and some will be rejected. </span><br><span class="line">for (i=1; i&lt;=10; i++) &#123;</span><br><span class="line">  let promise = promiseTRRARNOSG();</span><br><span class="line">  promise.then(function(value) &#123;</span><br><span class="line">    console.log(&quot;Value when promise is resolved : &quot;, value);</span><br><span class="line">  &#125;);</span><br><span class="line">  promise.catch(function(reason) &#123;</span><br><span class="line">    console.log(&quot;Reason when promise is rejected : &quot;, reason);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>刷新浏览器控制台，在控制台中执行上面的函数，观察不同的输出情况 resolve 和 reject。</p>
+<pre><code>function getRandomNumber(start = 1, end = 10) {
+  //works when both start,end are &gt;=1 and end &gt; start
+  return parseInt(Math.random() * end) % (end-start+1) + start;
+}
+</code></pre><p>下面将创建一返回promise的函数，使用随机函数，随机生成一个数，如果大于5将resolved，小于5返回 rejected，</p>
+<pre><code>function getRandomNumber(start = 1, end = 10) {
+  //works when both start and end are &gt;=1
+  return (parseInt(Math.random() * end) % (end - start + 1)) + start;
+}
+var promiseTRRARNOSG = (promiseThatResolvesRandomlyAfterRandomNumnberOfSecondsGenerator = function() {
+  return new Promise(function(resolve, reject) {
+    let randomNumberOfSeconds = getRandomNumber(2, 10);
+    setTimeout(function() {
+      let randomiseResolving = getRandomNumber(1, 10);
+      if (randomiseResolving &gt; 5) {
+        resolve({
+          randomNumberOfSeconds: randomNumberOfSeconds,
+          randomiseResolving: randomiseResolving
+        });
+      } else {
+        reject({
+          randomNumberOfSeconds: randomNumberOfSeconds,
+          randomiseResolving: randomiseResolving
+        });
+      }
+    }, randomNumberOfSeconds * 1000);
+  });
+});
+var testProimse = promiseTRRARNOSG();
+testProimse.then(function(value) {
+  console.log(&quot;Value when promise is resolved : &quot;, value);
+});
+testProimse.catch(function(reason) {
+  console.log(&quot;Reason when promise is rejected : &quot;, reason);
+});
+// Let us loop through and create ten different promises using the function to see some variation. Some will be resolved and some will be rejected. 
+for (i=1; i&lt;=10; i++) {
+  let promise = promiseTRRARNOSG();
+  promise.then(function(value) {
+    console.log(&quot;Value when promise is resolved : &quot;, value);
+  });
+  promise.catch(function(reason) {
+    console.log(&quot;Reason when promise is rejected : &quot;, reason);
+  });
+}
+</code></pre><p>刷新浏览器控制台，在控制台中执行上面的函数，观察不同的输出情况 resolve 和 reject。</p>
 <h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p>在Promise对象中，这里有四个静态方法</p>
 <p>前两个方法可以快速的创建resolved 或者 rejected  promise函数</p>
 <p>帮助你创建一个rejected promise</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Promise.reject(reason)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var promise3 = Promise.reject(&quot;Not interested&quot;);</span><br><span class="line">promise3.then(function(value)&#123;</span><br><span class="line">  console.log(&quot;This will not run as it is a resolved promise. The resolved value is &quot;, value);</span><br><span class="line">&#125;);</span><br><span class="line">promise3.catch(function(reason)&#123;</span><br><span class="line">  console.log(&quot;This run as it is a rejected promise. The reason is &quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>帮助你创建一个resolved promise</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Promise.resolve(value)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var promise4 = Promise.resolve(1);</span><br><span class="line">promise4.then(function(value)&#123;</span><br><span class="line">  console.log(&quot;This will run as it is a resovled promise. The resolved value is &quot;, value);</span><br><span class="line">&#125;);</span><br><span class="line">promise4.catch(function(reason)&#123;</span><br><span class="line">  console.log(&quot;This will not run as it is a resolved promise&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>一个promise可以有多个处理程序，更新上面的代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise4 = Promise.resolve(1);</span><br><span class="line">promise4.then(function(value)&#123;</span><br><span class="line">  console.log(&quot;This will run as it is a resovled promise. The resolved value is &quot;, value);</span><br><span class="line">&#125;);</span><br><span class="line">promise4.then(function(value)&#123;</span><br><span class="line">  console.log(&quot;This will also run as multiple handlers can be added. Printing twice the resolved value which is &quot;, value * 2);</span><br><span class="line">&#125;);</span><br><span class="line">promise4.catch(function(reason)&#123;</span><br><span class="line">  console.log(&quot;This will not run as it is a resolved promise&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>输出如下：<br><img src="https://cdn-images-1.medium.com/max/1600/1*dXk3jy1wB9iTXujph1EbcA.png" alt=""></p>
+<pre><code>Promise.reject(reason)
+</code></pre><pre><code>var promise3 = Promise.reject(&quot;Not interested&quot;);
+promise3.then(function(value){
+  console.log(&quot;This will not run as it is a resolved promise. The resolved value is &quot;, value);
+});
+promise3.catch(function(reason){
+  console.log(&quot;This run as it is a rejected promise. The reason is &quot;, reason);
+});
+</code></pre><p>帮助你创建一个resolved promise</p>
+<pre><code>Promise.resolve(value)
+</code></pre><pre><code>var promise4 = Promise.resolve(1);
+promise4.then(function(value){
+  console.log(&quot;This will run as it is a resovled promise. The resolved value is &quot;, value);
+});
+promise4.catch(function(reason){
+  console.log(&quot;This will not run as it is a resolved promise&quot;, reason);
+});
+</code></pre><p>一个promise可以有多个处理程序，更新上面的代码如下</p>
+<pre><code>var promise4 = Promise.resolve(1);
+promise4.then(function(value){
+  console.log(&quot;This will run as it is a resovled promise. The resolved value is &quot;, value);
+});
+promise4.then(function(value){
+  console.log(&quot;This will also run as multiple handlers can be added. Printing twice the resolved value which is &quot;, value * 2);
+});
+promise4.catch(function(reason){
+  console.log(&quot;This will not run as it is a resolved promise&quot;, reason);
+});
+</code></pre><p>输出如下：<br><img src="https://cdn-images-1.medium.com/max/1600/1*dXk3jy1wB9iTXujph1EbcA.png" alt=""></p>
 <p>下面的两个方法帮助你处理 promises。当你处理多个promises，最好的方法是创建一个promises数组，然后在设置promises的时候做必要的操作。下面创建两个方法，一个将在几秒钟之后resolve，另一个在几秒钟之后reject。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var promiseTRSANSG = (promiseThatResolvesAfterNSecondsGenerator = function(</span><br><span class="line">  n = 0</span><br><span class="line">) &#123;</span><br><span class="line">  return new Promise(function(resolve, reject) &#123;</span><br><span class="line">    setTimeout(function() &#123;</span><br><span class="line">      resolve(&#123;</span><br><span class="line">        resolvedAfterNSeconds: n</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;, n * 1000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var promiseTRJANSG = (promiseThatRejectsAfterNSecondsGenerator = function(</span><br><span class="line">  n = 0</span><br><span class="line">) &#123;</span><br><span class="line">  return new Promise(function(resolve, reject) &#123;</span><br><span class="line">    setTimeout(function() &#123;</span><br><span class="line">      reject(&#123;</span><br><span class="line">        rejectedAfterNSeconds: n</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;, n * 1000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="Promise-All"><a href="#Promise-All" class="headerlink" title="Promise.All"></a>Promise.All</h3><p>MDN 文档解释如下</p>
+<pre><code>var promiseTRSANSG = (promiseThatResolvesAfterNSecondsGenerator = function(
+  n = 0
+) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve({
+        resolvedAfterNSeconds: n
+      });
+    }, n * 1000);
+  });
+});
+
+var promiseTRJANSG = (promiseThatRejectsAfterNSecondsGenerator = function(
+  n = 0
+) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      reject({
+        rejectedAfterNSeconds: n
+      });
+    }, n * 1000);
+  });
+});
+</code></pre><h3 id="Promise-All"><a href="#Promise-All" class="headerlink" title="Promise.All"></a>Promise.All</h3><p>MDN 文档解释如下</p>
 <blockquote>
 <p>Promise.all(iterable)方法返回一个<code>Promise</code>实例，此实例在<code>iterable</code>参数内所有的promise都完成(resolved)或参数中不包含promise时回调完成(resolve);如果参数中promise有一个失败（rejected），此实例回调失败（reject），失败原因的是一个失败<code>promise</code>结果。</p>
 </blockquote>
 <p><strong>示例1：</strong>当所有的promise都完成（resolved）。大多数都会设想这种情况。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;Promise.All&quot;);</span><br><span class="line">var promisesArray = [];</span><br><span class="line">promisesArray.push(promiseTRSANSG(1));</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">promisesArray.push(promiseTRSANSG(2));</span><br><span class="line">var handleAllPromises = Promise.all(promisesArray);</span><br><span class="line">handleAllPromises.then(function(values) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.All&quot;);</span><br><span class="line">  console.log(&quot;All the promises are resolved&quot;, values);</span><br><span class="line">&#125;);</span><br><span class="line">handleAllPromises.catch(function(reason) &#123;</span><br><span class="line">  console.log(&quot;One of the promises failed with the following reason&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*_gAQxkb19weN6ajUgzi0WA.png" alt=""></p>
+<pre><code>console.time(&quot;Promise.All&quot;);
+var promisesArray = [];
+promisesArray.push(promiseTRSANSG(1));
+promisesArray.push(promiseTRSANSG(4));
+promisesArray.push(promiseTRSANSG(2));
+var handleAllPromises = Promise.all(promisesArray);
+handleAllPromises.then(function(values) {
+  console.timeEnd(&quot;Promise.All&quot;);
+  console.log(&quot;All the promises are resolved&quot;, values);
+});
+handleAllPromises.catch(function(reason) {
+  console.log(&quot;One of the promises failed with the following reason&quot;, reason);
+});
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/1600/1*_gAQxkb19weN6ajUgzi0WA.png" alt=""></p>
 <p>我们从结果中得出两个重要的结论</p>
 <ol>
 <li>第三个promise花了两秒完成，上一个promise花了4秒完成。但是正如你看到的输出仍然保持有序的状态</li>
 <li>上面的程序增加了一个timer用于记录<code>Promise.All</code>花了多长时间。如果promise是按顺序执行的需要花费 1+4+2=7秒。但是从我们的timer中可以看到只花费了4秒。这可以证明所有的promises是并行执行的。</li>
 </ol>
 <p><strong>示例2：</strong>当没有promises会发生什么</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;Promise.All&quot;);</span><br><span class="line">var promisesArray = [];</span><br><span class="line">promisesArray.push(1);</span><br><span class="line">promisesArray.push(4);</span><br><span class="line">promisesArray.push(2);</span><br><span class="line">var handleAllPromises = Promise.all(promisesArray);</span><br><span class="line">handleAllPromises.then(function(values) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.All&quot;);</span><br><span class="line">  console.log(&quot;All the promises are resolved&quot;, values);</span><br><span class="line">&#125;);</span><br><span class="line">handleAllPromises.catch(function(reason) &#123;</span><br><span class="line">  console.log(&quot;One of the promises failed with the following reason&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*TETvAXYEHE4x58OdimRXww.png" alt=""></p>
+<pre><code>console.time(&quot;Promise.All&quot;);
+var promisesArray = [];
+promisesArray.push(1);
+promisesArray.push(4);
+promisesArray.push(2);
+var handleAllPromises = Promise.all(promisesArray);
+handleAllPromises.then(function(values) {
+  console.timeEnd(&quot;Promise.All&quot;);
+  console.log(&quot;All the promises are resolved&quot;, values);
+});
+handleAllPromises.catch(function(reason) {
+  console.log(&quot;One of the promises failed with the following reason&quot;, reason);
+});
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/1600/1*TETvAXYEHE4x58OdimRXww.png" alt=""></p>
 <p>因为数组中没有promises，返回的promises是已完成的（resolved）</p>
 <p><strong>示例3：</strong>当只有一个promises返回失败时会怎么样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;Promise.All&quot;);</span><br><span class="line">var promisesArray = [];</span><br><span class="line">promisesArray.push(promiseTRSANSG(1));</span><br><span class="line">promisesArray.push(promiseTRSANSG(5));</span><br><span class="line">promisesArray.push(promiseTRSANSG(3));</span><br><span class="line">**promisesArray.push(promiseTRJANSG(2));**</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">var handleAllPromises = Promise.all(promisesArray);</span><br><span class="line">handleAllPromises.then(function(values) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.All&quot;);</span><br><span class="line">  console.log(&quot;All the promises are resolved&quot;, values);</span><br><span class="line">&#125;);</span><br><span class="line">handleAllPromises.catch(function(reason) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.All&quot;);</span><br><span class="line">  console.log(&quot;One of the promises failed with the following reason &quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*y_NCGDEfc3PKctq5-ZO8iA.png" alt=""><br>当执行到失败程序时，promises里面停止并返回reject信息</p>
+<pre><code>console.time(&quot;Promise.All&quot;);
+var promisesArray = [];
+promisesArray.push(promiseTRSANSG(1));
+promisesArray.push(promiseTRSANSG(5));
+promisesArray.push(promiseTRSANSG(3));
+**promisesArray.push(promiseTRJANSG(2));**
+promisesArray.push(promiseTRSANSG(4));
+var handleAllPromises = Promise.all(promisesArray);
+handleAllPromises.then(function(values) {
+  console.timeEnd(&quot;Promise.All&quot;);
+  console.log(&quot;All the promises are resolved&quot;, values);
+});
+handleAllPromises.catch(function(reason) {
+  console.timeEnd(&quot;Promise.All&quot;);
+  console.log(&quot;One of the promises failed with the following reason &quot;, reason);
+});
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/1600/1*y_NCGDEfc3PKctq5-ZO8iA.png" alt=""><br>当执行到失败程序时，promises里面停止并返回reject信息</p>
 <p><strong>综上：</strong> <code>Promise.all()</code>只有在所有的promise数组都resolve时才会返回所有完成的数据。但要是数组中有一个promise任务失败，<code>Promise.all()</code>就会返回当前失败的promise信息，而就算其他的promise任务执行成功，也会返回reject。可以这么理解，<code>Promise.all()</code>返回结果要么是所有的，要么什么都没有。</p>
 <h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race"></a>Promise.race</h3><p>MDN文档说明</p>
 <blockquote>
 <p><strong>Promise.race(iterable)</strong>方法返回一个promise，一旦迭代器中的某个promise解决或拒绝，返回的promise就会解决或拒绝。</p>
 </blockquote>
 <p>示例1：promises优先解决</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;Promise.race&quot;);</span><br><span class="line">var promisesArray = [];</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">promisesArray.push(promiseTRSANSG(3));</span><br><span class="line">promisesArray.push(promiseTRSANSG(2));</span><br><span class="line">promisesArray.push(promiseTRJANSG(3));</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">var promisesRace = Promise.race(promisesArray);</span><br><span class="line">promisesRace.then(function(values) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.race&quot;);</span><br><span class="line">  console.log(&quot;The fasted promise resolved&quot;, values);</span><br><span class="line">&#125;);</span><br><span class="line">promisesRace.catch(function(reason) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.race&quot;);</span><br><span class="line">  console.log(&quot;The fastest promise rejected with the following reason &quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*6za2DUGOKIxARTyfP5HihQ.png" alt=""></p>
+<pre><code>console.time(&quot;Promise.race&quot;);
+var promisesArray = [];
+promisesArray.push(promiseTRSANSG(4));
+promisesArray.push(promiseTRSANSG(3));
+promisesArray.push(promiseTRSANSG(2));
+promisesArray.push(promiseTRJANSG(3));
+promisesArray.push(promiseTRSANSG(4));
+var promisesRace = Promise.race(promisesArray);
+promisesRace.then(function(values) {
+  console.timeEnd(&quot;Promise.race&quot;);
+  console.log(&quot;The fasted promise resolved&quot;, values);
+});
+promisesRace.catch(function(reason) {
+  console.timeEnd(&quot;Promise.race&quot;);
+  console.log(&quot;The fastest promise rejected with the following reason &quot;, reason);
+});
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/1600/1*6za2DUGOKIxARTyfP5HihQ.png" alt=""></p>
 <p>所以的promises并行执行，第三个promise在2秒内完成，只要这个promise完成，<code>Promise.race</code>被解决。</p>
 <p>示例2：当promises中reject程序优先完成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;Promise.race&quot;);</span><br><span class="line">var promisesArray = [];</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">promisesArray.push(promiseTRSANSG(6));</span><br><span class="line">promisesArray.push(promiseTRSANSG(5));</span><br><span class="line">promisesArray.push(promiseTRJANSG(3));</span><br><span class="line">promisesArray.push(promiseTRSANSG(4));</span><br><span class="line">var promisesRace = Promise.race(promisesArray);</span><br><span class="line">promisesRace.then(function(values) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.race&quot;);</span><br><span class="line">  console.log(&quot;The fasted promise resolved&quot;, values);</span><br><span class="line">&#125;);</span><br><span class="line">promisesRace.catch(function(reason) &#123;</span><br><span class="line">  console.timeEnd(&quot;Promise.race&quot;);</span><br><span class="line">  console.log(&quot;The fastest promise rejected with the following reason &quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*CvfsxAM8XbGZYTXo5KjiCA.png" alt=""></p>
+<pre><code>console.time(&quot;Promise.race&quot;);
+var promisesArray = [];
+promisesArray.push(promiseTRSANSG(4));
+promisesArray.push(promiseTRSANSG(6));
+promisesArray.push(promiseTRSANSG(5));
+promisesArray.push(promiseTRJANSG(3));
+promisesArray.push(promiseTRSANSG(4));
+var promisesRace = Promise.race(promisesArray);
+promisesRace.then(function(values) {
+  console.timeEnd(&quot;Promise.race&quot;);
+  console.log(&quot;The fasted promise resolved&quot;, values);
+});
+promisesRace.catch(function(reason) {
+  console.timeEnd(&quot;Promise.race&quot;);
+  console.log(&quot;The fastest promise rejected with the following reason &quot;, reason);
+});
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/1600/1*CvfsxAM8XbGZYTXo5KjiCA.png" alt=""></p>
 <p>所有的promise并行执行。第四个promise在3秒内reject。只要这个完成，<code>Promise.race</code>返回rejected</p>
 <p><strong>综上：</strong> <code>Promise.race()</code>传入的promise数组中，总是返回最先执行完的一个，不管是reject还是resolved</p>
 <hr>

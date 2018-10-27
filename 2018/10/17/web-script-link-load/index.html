@@ -3,13 +3,13 @@
 <h3 id="async-amp-amp-defer"><a href="#async-amp-amp-defer" class="headerlink" title="async &amp;&amp; defer"></a>async &amp;&amp; defer</h3><script src="script.js"></script>
 
 <p>没有 defer 或 async，浏览器会立即加载并执行指定的脚本，“立即”指的是在渲染该 script 标签之下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。</p>
-<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=&quot;script.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>有 async，加载和渲染后续文档元素的过程将和 script.js 的加载与执行并行进行（异步）。</p>
-<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script defer src=&quot;myscript.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>有 defer，加载后续文档元素的过程将和 script.js 的加载并行进行（异步），但是 script.js 的执行要在所有元素解析完成之后，DOMContentLoaded 事件触发之前完成。</p>
+<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><pre><code>&lt;script async src=&quot;script.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>有 async，加载和渲染后续文档元素的过程将和 script.js 的加载与执行并行进行（异步）。</p>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><pre><code>&lt;script defer src=&quot;myscript.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>有 defer，加载后续文档元素的过程将和 script.js 的加载并行进行（异步），但是 script.js 的执行要在所有元素解析完成之后，DOMContentLoaded 事件触发之前完成。</p>
 <p><img src="https://segmentfault.com/img/bVWhRl?w=801&amp;h=814" alt="图片解说"></p>
-<h4 id="Nuxt-添加defer"><a href="#Nuxt-添加defer" class="headerlink" title="Nuxt 添加defer"></a>Nuxt 添加defer</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; src: &apos;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js&apos;, defer: true &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>总结</strong></p>
+<h4 id="Nuxt-添加defer"><a href="#Nuxt-添加defer" class="headerlink" title="Nuxt 添加defer"></a>Nuxt 添加defer</h4><pre><code>{ src: &#39;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js&#39;, defer: true }
+</code></pre><p><strong>总结</strong></p>
 <ul>
 <li>defer和async都不会阻止Document的解析，都是异步</li>
 <li>defer会在DOMContentLoaded前依次按照加载顺序执行脚本</li>
@@ -21,8 +21,8 @@
 <p>link prefetch 是一种浏览器机制，其利用浏览器空闲时间来下载或预取用户在不久的将来可能访问的文档。页面向浏览器提供一组预取提示，并在浏览器完成当前页面的加载后开始静默的拉取执行的文档并将其存储在缓存中。当用户访问其中一个预取文档时，便可以快速的从浏览器缓存中得到</p>
 </blockquote>
 <h4 id="预加载Link-prefetch写法"><a href="#预加载Link-prefetch写法" class="headerlink" title="预加载Link prefetch写法"></a>预加载Link prefetch写法</h4><p>HTML5页面资源预加载/预读取功能是通过Link标记实现的，将rel属性指定为prefetch，在href属性指定要加载的资源地址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;prefetch&quot; href=&quot;/images/big.jpeg&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="prefetch在什么情况下使用"><a href="#prefetch在什么情况下使用" class="headerlink" title="prefetch在什么情况下使用"></a>prefetch在什么情况下使用</h4><ul>
+<pre><code>&lt;link rel=&quot;prefetch&quot; href=&quot;/images/big.jpeg&quot;&gt;
+</code></pre><h4 id="prefetch在什么情况下使用"><a href="#prefetch在什么情况下使用" class="headerlink" title="prefetch在什么情况下使用"></a>prefetch在什么情况下使用</h4><ul>
 <li>当页面有幻灯片类似的服务时，预加载/预读取接下来的1-3页和之前的1-3页。</li>
 <li>预加载那些整个网站通用的图片。</li>
 <li>预加载网站上搜索结果的下一页。</li>

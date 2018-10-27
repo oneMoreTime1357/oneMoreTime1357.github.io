@@ -1,10 +1,33 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Position fixed Inner content list 滚动卡顿 · MissYang</title><meta name="description" content="Position fixed Inner content list 滚动卡顿 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Position fixed Inner content list 滚动卡顿</h1><div class="post-info">Jan 29, 2018</div><div class="post-content"><p>在做项目的过程中，总是会遇到要实现一个弹出视图，多数需求都是在弹出视图中添加一个滚动列表，使弹出视图撑满整个屏幕，并固定在屏幕上方，一般都会想到使用<code>position: fixed</code> 将top, left, right ,bottom 都设置为0，这样就能撑满整个屏幕，在当前窗口弹出一个固定位置的视图大小，示例如下代码<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.model-fixed-view &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  top: 0;</span><br><span class="line">  bottom: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  margin: 30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在<code>.model-fixed-view</code>这个视图已经固定在屏幕上方距离边界30px的位置，那接下来需要在上面加载一个列表，并能滚动例如。<br><img src="http://oybj22zxs.bkt.clouddn.com/scroll-text.png" alt=""></p>
-<p>在html中一般只要内部视图超出屏幕高度，就会自动滚动加载。如下设置一个视图高度很高的样式，来模拟滚动的操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.content &#123;</span><br><span class="line">  background-color: blue;</span><br><span class="line">  height: 2000px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>样式展示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;model-fixed-view&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;content&quot;&gt;ddd&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<p>但是这样写之后会发现一个问题，内部视图虽然已将远远超出父视图的高度，但是内部视图不能滚动加载，即使能滚动加载，在手机上滑动滚动的时候依然很少卡顿，在试了各种办法之后，依然效果不好，网上搜集资料找到了如下解决办法。</p>
-<h4 id="解决fixed-content滑动卡顿，不滑动的问题"><a href="#解决fixed-content滑动卡顿，不滑动的问题" class="headerlink" title="解决fixed content滑动卡顿，不滑动的问题"></a>解决fixed content滑动卡顿，不滑动的问题</h4><p>找了一些办法，只要在设置fixed父视图中添加如下的样式，就可以解决滑动卡顿，滑动不流畅的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.model-fixed-view &#123;</span><br><span class="line">  overflow-y: scroll;</span><br><span class="line">  -webkit-overflow-scrolling: touch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>参考链接：<br><a href="https://css-tricks.com/forums/topic/prevent-body-scrolling-when-the-user-scrolls-on-fixed-position-div/" target="_blank" rel="noopener">https://css-tricks.com/forums/topic/prevent-body-scrolling-when-the-user-scrolls-on-fixed-position-div/</a></p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Position fixed Inner content list 滚动卡顿 · MissYang</title><meta name="description" content="Position fixed Inner content list 滚动卡顿 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Position fixed Inner content list 滚动卡顿</h1><div class="post-info">Jan 29, 2018</div><div class="post-content"><p>在做项目的过程中，总是会遇到要实现一个弹出视图，多数需求都是在弹出视图中添加一个滚动列表，使弹出视图撑满整个屏幕，并固定在屏幕上方，一般都会想到使用<code>position: fixed</code> 将top, left, right ,bottom 都设置为0，这样就能撑满整个屏幕，在当前窗口弹出一个固定位置的视图大小，示例如下代码<br><a id="more"></a></p>
+<pre><code>html, body {
+  margin: 0 auto;
+}
+
+.model-fixed-view {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 30px;
+}
+</code></pre><p>现在<code>.model-fixed-view</code>这个视图已经固定在屏幕上方距离边界30px的位置，那接下来需要在上面加载一个列表，并能滚动例如。<br><img src="http://oybj22zxs.bkt.clouddn.com/scroll-text.png" alt=""></p>
+<p>在html中一般只要内部视图超出屏幕高度，就会自动滚动加载。如下设置一个视图高度很高的样式，来模拟滚动的操作。</p>
+<pre><code>.content {
+  background-color: blue;
+  height: 2000px;
+}
+</code></pre><p>样式展示</p>
+<pre><code>&lt;div class=&quot;model-fixed-view&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;ddd&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>但是这样写之后会发现一个问题，内部视图虽然已将远远超出父视图的高度，但是内部视图不能滚动加载，即使能滚动加载，在手机上滑动滚动的时候依然很少卡顿，在试了各种办法之后，依然效果不好，网上搜集资料找到了如下解决办法。</p>
+<h4 id="解决fixed-content滑动卡顿，不滑动的问题"><a href="#解决fixed-content滑动卡顿，不滑动的问题" class="headerlink" title="解决fixed content滑动卡顿，不滑动的问题"></a>解决fixed content滑动卡顿，不滑动的问题</h4><p>找了一些办法，只要在设置fixed父视图中添加如下的样式，就可以解决滑动卡顿，滑动不流畅的问题</p>
+<pre><code>.model-fixed-view {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+</code></pre><p>参考链接：<br><a href="https://css-tricks.com/forums/topic/prevent-body-scrolling-when-the-user-scrolls-on-fixed-position-div/" target="_blank" rel="noopener">https://css-tricks.com/forums/topic/prevent-body-scrolling-when-the-user-scrolls-on-fixed-position-div/</a></p>
 </div></article></div></main><footer><div class="paginator"><a href="/2018/04/03/CSS垂直居中/" class="prev">PREV</a><a href="/2018/01/17/start2018/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
 var disqus_identifier = '2018/01/29/position-fixed-content-scroll/';
 var disqus_title = 'Position fixed Inner content list 滚动卡顿';

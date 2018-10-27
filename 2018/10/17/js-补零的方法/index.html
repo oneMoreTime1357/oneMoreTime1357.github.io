@@ -1,7 +1,63 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> JS 数字补零的几种方法 · MissYang</title><meta name="description" content="JS 数字补零的几种方法 - Sunny Yang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yikeshu.info/atom.xml" title="MissYang"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon-logo.png" alt="logo"><span>Sunny Yang</span></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/oneMoreTime1357" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="https://www.jianshu.com/u/459674901bd7" target="_blank" class="nav-list-link">JANSHU</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">JS 数字补零的几种方法</h1><div class="post-info">Oct 17, 2018</div><div class="post-content"><p>本文介绍几种补零的方法</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 简单的for 循环补零</span><br><span class="line"></span><br><span class="line">function addPrefix1 (num, length) &#123;</span><br><span class="line">  for (var i = num.toString().length; i &lt; length; i++) &#123;</span><br><span class="line">    num = &apos;0&apos; + num</span><br><span class="line">  &#125;</span><br><span class="line">  return num</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 使用递归的方式添加</span><br><span class="line">function addPrefix2 (num, length) &#123;</span><br><span class="line">  if (num.toString().length &gt;= length) &#123;</span><br><span class="line">    return num</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return addPrefix2(&apos;0&apos; + num, length)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 转化为小数</span><br><span class="line">function addPrefix3 (num, length) &#123;</span><br><span class="line">  let decimal = num / Math.pow(10, length)</span><br><span class="line"></span><br><span class="line">  decimal = decimal.toFixed(length)</span><br><span class="line">  return decimal.substr(decimal.indexOf(&apos;.&apos;) + 1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 数组填充法</span><br><span class="line">function addPrefix4 (num, length) &#123;</span><br><span class="line">  return (Array(length).join(&apos;0&apos;) + num).slice(-length)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 填充截取法</span><br><span class="line">function addPrefix5 (num, length) &#123;</span><br><span class="line">  var len = num.toString().length</span><br><span class="line">  var diff = length - len</span><br><span class="line">  if (diff &gt; 0) &#123;</span><br><span class="line">    return Array(diff).join(&apos;0&apos;) + num</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let fix1 = addPrefix1(212, 8)</span><br><span class="line">console.log(fix1) // 00000212</span><br><span class="line"></span><br><span class="line">let fix2 = addPrefix2(21, 8)</span><br><span class="line">console.log(fix2) // 00000021</span><br><span class="line"></span><br><span class="line">let fix3 = addPrefix3(21, 8)</span><br><span class="line">console.log(fix3) // 00000021</span><br><span class="line"></span><br><span class="line">let fix4 = addPrefix4(21, 8)</span><br><span class="line">console.log(fix4) // 00000021</span><br><span class="line"></span><br><span class="line">let fix5 = addPrefix4(21, 8)</span><br><span class="line">console.log(fix5) // 00000021</span><br></pre></td></tr></table></figure>
-</div></article></div></main><footer><div class="paginator"><a href="/2018/10/17/web-script-link-load/" class="prev">PREV</a><a href="/2018/09/09/2018-9-9-console/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
+<pre><code>
+// 简单的for 循环补零
+
+function addPrefix1 (num, length) {
+  for (var i = num.toString().length; i &lt; length; i++) {
+    num = &#39;0&#39; + num
+  }
+  return num
+}
+
+
+// 使用递归的方式添加
+function addPrefix2 (num, length) {
+  if (num.toString().length &gt;= length) {
+    return num
+  }
+
+  return addPrefix2(&#39;0&#39; + num, length)
+}
+
+// 转化为小数
+function addPrefix3 (num, length) {
+  let decimal = num / Math.pow(10, length)
+
+  decimal = decimal.toFixed(length)
+  return decimal.substr(decimal.indexOf(&#39;.&#39;) + 1)
+}
+
+// 数组填充法
+function addPrefix4 (num, length) {
+  return (Array(length).join(&#39;0&#39;) + num).slice(-length)
+}
+
+// 填充截取法
+function addPrefix5 (num, length) {
+  var len = num.toString().length
+  var diff = length - len
+  if (diff &gt; 0) {
+    return Array(diff).join(&#39;0&#39;) + num
+  }
+}
+
+
+let fix1 = addPrefix1(212, 8)
+console.log(fix1) // 00000212
+
+let fix2 = addPrefix2(21, 8)
+console.log(fix2) // 00000021
+
+let fix3 = addPrefix3(21, 8)
+console.log(fix3) // 00000021
+
+let fix4 = addPrefix4(21, 8)
+console.log(fix4) // 00000021
+
+let fix5 = addPrefix4(21, 8)
+console.log(fix5) // 00000021
+</code></pre></div></article></div></main><footer><div class="paginator"><a href="/2018/10/17/web-script-link-load/" class="prev">PREV</a><a href="/2018/09/09/2018-9-9-console/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'http-yikeshu-info';
 var disqus_identifier = '2018/10/17/js-补零的方法/';
 var disqus_title = 'JS 数字补零的几种方法';
 var disqus_url = 'http://yikeshu.info/2018/10/17/js-补零的方法/';
