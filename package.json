@@ -4,7 +4,8 @@
   "description": "jekyll blog",
   "main": "n",
   "scripts": {
-    "test": "n"
+    "test": "n",
+    "create-file": ""
   },
   "repository": {
     "type": "git",
