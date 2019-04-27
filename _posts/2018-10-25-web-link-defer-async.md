@@ -8,7 +8,9 @@ tags:
 
 ### async && defer
 
+```js
 <script src="script.js"></script>
+```
 
 没有 defer 或 async，浏览器会立即加载并执行指定的脚本，“立即”指的是在渲染该 script 标签之下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。
 
