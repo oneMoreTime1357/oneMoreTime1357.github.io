@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 算法 - 第一周
+title: 算法小练#1
 tags: 
   - 笔记
   - 算法
