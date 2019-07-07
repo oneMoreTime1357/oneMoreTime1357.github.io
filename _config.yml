@@ -123,12 +123,8 @@ page-mathjax: false
 
 # Friends
 friends: [
-    {
-        title: "Hux",
-        href: "https://huangxuan.me/"
-    },
-    {
-      title: "savokiss",
-      href: "https://savokiss.com/"
-    }
+  {
+    title: "savokiss",
+    href: "https://savokiss.com/"
+  }
 ]
