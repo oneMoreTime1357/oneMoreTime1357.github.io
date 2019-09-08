@@ -5,6 +5,7 @@ tags:
     - MongoDB
     - 笔记
     - 读译
+    - Review
 ---
 
 这两天在新电脑上安装MongoDB，竟然忘了是怎么安装的了，以下是按照这一篇文章的安装教程，简单的翻译了一下。[翻译原文 Installing MongoDB on a Mac](https://treehouse.github.io/installation-guides/mac/mongo-mac.html)

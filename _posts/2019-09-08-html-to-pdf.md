@@ -5,6 +5,7 @@ tags:
     - JS
     - HTML
     - 笔记
+    - Tips
 ---
 
 
@@ -13,7 +14,7 @@ tags:
 在浏览器上直接打开网页，浏览器是支持将当前网页转成PDF下载的，右键->打印就可以了，但是不符合需求设定，需求是要在当前页面打开一个弹窗，然后下载弹窗里面展示的内容，而不是整个页面的内容，那就只能用其他办法了。发现有两个JS库可以支持这一操作的完成[Html2canvas](http://html2canvas.hertzen.com/getting-started)、[jsPDF](https://github.com/MrRio/jsPDF)，思路是这样的，首先使用Html2canvas将html页面生成canvas快照，然后再使用jsPDF将canvas转成PDF，下面就简单介绍一下解决办法。
 
 ### Html2canvas
-[Html2canvas github](https://github.com/niklasvh/html2canvas/)
+[Html2canvas](https://github.com/niklasvh/html2canvas/)
 Html2canvas可以在浏览器中基于网页DOM生成屏幕快照，或者页面部分的快照，但不是100%精确。它是浏览器客户端界面生成的并不需要服务端的参与。
 
 
@@ -22,19 +23,20 @@ Html2canvas可以在浏览器中基于网页DOM生成屏幕快照，或者页面
 html2canvas使用Promise构建，该函数返回一个包含canvas的promise。
 
 ```js
-html2canvas(document.body).then(function(canvas) {          document.body.appendChild(canvas);
+html2canvas(document.body).then(function(canvas) {  
+  document.body.appendChild(canvas);
 });
 ```
 
 ### jsPDF
-[jsPDF Github](https://github.com/MrRio/jsPDF)
+[jsPDF](https://github.com/MrRio/jsPDF)
 用于浏览器客户端生成PDF。可以将文字生成PDF，图片生成PDF
 
 #### 使用
 
 将图片文字生成PDF。[Demo示例](https://raw.githack.com/MrRio/jsPDF/master/)
 
-```JS
+```js
 var imgData = 'data:image/jpeg;base64,/9j/4AAQSkZJRg....';
 
 var doc = new jsPDF();
