@@ -21,7 +21,7 @@ module.exports = {
     },
     {
       value: 'docs',
-      name : '📚  docs:     Documentation only changes'
+      name : '📚:robot:  docs:     Documentation only changes'
     },
     {
       value: 'style',

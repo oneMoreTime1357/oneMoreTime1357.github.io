@@ -1,4 +1,4 @@
-博客地址 http://yikeshu.info
+博客地址 http://yikeshu.me
 
 - 本博客主要采用Jekyll，github pages生成
 - 如果喜欢可以直接fork到自己的仓库，记得把本博客的内容删掉，网站域名换上自己的就OK了
