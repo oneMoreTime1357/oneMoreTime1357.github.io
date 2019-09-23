@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-
   types: [
     {
       value: 'article',
@@ -21,7 +20,7 @@ module.exports = {
     },
     {
       value: 'docs',
-      name : '📚:robot:  docs:     Documentation only changes'
+      name : '📚  docs:     Documentation only changes'
     },
     {
       value: 'style',
