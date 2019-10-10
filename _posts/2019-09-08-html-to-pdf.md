@@ -11,7 +11,12 @@ tags:
 
 这周有一个需求，产品需要在后台系统预览一个网页图表信息，然后可以直接将这个图表下载成PDF保存到本地。这么骚的操作，之前还没有遇到，大概调研了一下。
 
-在浏览器上直接打开网页，浏览器是支持将当前网页转成PDF下载的，右键->打印就可以了，但是不符合需求设定，需求是要在当前页面打开一个弹窗，然后下载弹窗里面展示的内容，而不是整个页面的内容，那就只能用其他办法了。发现有两个JS库可以支持这一操作的完成[Html2canvas](http://html2canvas.hertzen.com/getting-started)、[jsPDF](https://github.com/MrRio/jsPDF)，思路是这样的，首先使用Html2canvas将html页面生成canvas快照，然后再使用jsPDF将canvas转成PDF，下面就简单介绍一下解决办法。
+在浏览器上直接打开网页，浏览器是支持将当前网页转成PDF下载的，右键->打印就可以了，但是不符合需求设定，需求是要在当前页面打开一个弹窗，然后下载弹窗里面展示的内容，而不是整个页面的内容，那就只能用其他办法了。发现有两个JS库可以支持这一操作的完成[Html2canvas](http://html2canvas.hertzen.com/getting-started)、[jsPDF](https://github.com/MrRio/jsPDF)，思路是这样的，分两步。
+
+1. 首先使用Html2canvas将html页面生成canvas快照，
+2. 再使用jsPDF将canvas转成PDF
+
+下面就简单介绍一下详细步骤
 
 ### Html2canvas
 [Html2canvas](https://github.com/niklasvh/html2canvas/)
