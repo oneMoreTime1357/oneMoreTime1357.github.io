@@ -127,5 +127,13 @@ friends: [
   {
     title: "savokiss",
     href: "https://savokiss.com/"
+  },
+  {
+    title: "coolshell",
+    href: "https://coolshell.cn/"
+  },
+  {
+    title: "ruanyifeng",
+    href: "http://www.ruanyifeng.com/blog/"
   }
 ]
