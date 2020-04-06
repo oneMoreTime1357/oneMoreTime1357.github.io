@@ -20,7 +20,7 @@ gulp.task('js', function () {
 });
 
 // 实时编译
-gulp.task('default', ['less', 'js'], function() {
-    gulp.watch('less/*.less', ['less']);
-    gulp.watch('js/blog.js', ['js'])
-});
+gulp.task('default', gulp.series('less', 'js', function() {
+    gulp.watch('less/*.less', gulp.series('less'));
+    gulp.watch('js/blog.js', gulp.series('js'))
+}));

@@ -1,7 +1,6 @@
 ---
 layout:     post
 title:      "Web分享到Twitter、Facebook、微信、微博"
-author:     "Sunny"
 tags:
     - Web
     - 笔记
