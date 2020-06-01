@@ -58,7 +58,7 @@ Error: Requires Babel "^7.0.0-0", but was loaded with "6.26.0". If you are sure 
 
 ### 升级Babel7
 项目依赖中的babel，还是比较多的。更新之前，如下是项目中用到的babel及插件：
-![4b291b7b5ff5794fc9228996d9e895bc.png](evernotecid://592FCF31-84A6-46A6-91B5-04E8B32E59AA/appyinxiangcom/11942720/ENResource/p1173)
+![4b291b7b5ff5794fc9228996d9e895bc.png](https://cdn.nlark.com/yuque/0/2020/png/385711/1591024194041-d162d1a7-5064-4322-a19a-5dc58c1b9d99.png)
 
 1、首先卸载`babel-core`，安装新的`@babel/core`
 
@@ -94,9 +94,10 @@ yarn add @babel/preset-env
 4、升级babel-loader，babel7依赖babel-loader 8.x
 
 调整完之后
-![d4804e167f666442cd3c28855fb652ee.png](evernotecid://592FCF31-84A6-46A6-91B5-04E8B32E59AA/appyinxiangcom/11942720/ENResource/p1174)
 
-就这样遇到问题解决问题，直到运行正确没问题为止。
+![d4804e167f666442cd3c28855fb652ee.png](https://cdn.nlark.com/yuque/0/2020/png/385711/1591024281827-86737686-0f67-4fb2-bd13-dc6c769a3b91.png)
+
+遇到问题解决问题，直到运行正确没问题为止。
 
 ### 小结
 项目优化，任何小的改动都可能会引起项目的问题，所以在实施某个方案之前要做充足的评估，改动影响的范围，之后需要做相应的测试验证。
