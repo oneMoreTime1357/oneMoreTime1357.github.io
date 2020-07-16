@@ -29,4 +29,4 @@ jekyll serve
 ```
 ---
 
-本博客借鉴了大牛https://github.com/Huxpro/huxpro.github.io 的模板
+本博客借鉴了此https://github.com/Huxpro/huxpro.github.io 博客的模板
