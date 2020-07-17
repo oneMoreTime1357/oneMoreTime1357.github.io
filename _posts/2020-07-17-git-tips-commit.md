@@ -35,4 +35,4 @@ Date:   Fri Jul 17 14:24:52 2020 +0800
 
 **参考链接：**
 
-https://www.stefanjudis.com/today-i-learned/git-commit-accepts-several-message-flags-m-to-allow-multiline-commits/
+[git commit accepts several message flags (-m) to allow multiline commits](https://www.stefanjudis.com/today-i-learned/git-commit-accepts-several-message-flags-m-to-allow-multiline-commits/)
