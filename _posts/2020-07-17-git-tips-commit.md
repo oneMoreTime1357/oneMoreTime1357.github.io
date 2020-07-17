@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Git tips: Git commit -m多行提交
+title:      Git tips： Git commit -m多行提交
 date:  2020-7-17
 tags:
     - 笔记
