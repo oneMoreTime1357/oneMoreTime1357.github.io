@@ -12,8 +12,9 @@ tags:
 
 ---
 
-在CSS世界中，SASS/SCSS,LESS,PostCSS是最常见的CSS预处理器。SASS似乎是最流行的解决方案，它的功能丰富扩展的CSS语言更容易使人理解。
-在Vue中多亏了 vue-loader ，只需要单个文件组件的样式标记中添加带有所需语言的 lang="scss" 属性，就可以使用这些解决方案中的任何一个：
+在CSS世界中，SASS/SCSS,LESS,PostCSS是最常见的CSS预处理器。SASS似乎是最流行的解决方案，它的功能丰富，扩展的CSS语言更容易使人理解。
+
+在Vue中多亏了 `vue-loader` ，只需要单个文件组件的样式中标记，添加带有所需语言的 `lang="scss"` 属性，就可以使用这些预处理器解决方案中的任何一个：
 
 ```css
 <!-- Classroom.vue -->
@@ -25,7 +26,7 @@ $bg-classroom: #232323;
 </style>
 ```
 
-随着项目的增长，为了便于管理和配置，将SASS中的变量、mixin和函数，拆分成单独的文件，通过 @import 指令导入它们：
+随着项目规模增长，为了便于管理和配置，将SASS中的变量、mixin和函数，拆分成单独的文件，通过 `@import` 指令导入它们：
 
 ```css
 /* scss/_variables.scss */
@@ -39,7 +40,7 @@ $bg-classroom: #232323;
 </style>
 ```
 
-这样拆分之后会更清晰，但问题是，我们在需要使用变量、mixin或函数的每个组件都必须导入这些文件，这将成为一个非常重要的任务，下面的这些代码将会在所有组件中重复出现：
+这样拆分之后会更清晰，但问题是，我们在需要使用变量、mixin或函数的每个组件都必须导入这些文件，这将成为一个非常繁琐的任务，下面的这些代码将会在所有组件中重复出现：
 
 ```css
 <style lang="scss">
@@ -54,7 +55,7 @@ $bg-classroom: #232323;
 
 ## 在vue-cli中加载全局SASS
 
-在这里默认您是使用 vue-cli v3.x 创建的项目，如果没有，可以通过安装cli并运行create命令来创建它：
+在这里默认您是使用 `vue-cli v3.x` 创建的项目，如果没有，可以通过安装cli并运行create命令来创建它：
 
 ```shell
 npm install -g vue-cli
@@ -69,7 +70,7 @@ npm install --save-dev node-sass sass-loader
 
 `vue-cli` 允许通过在项目的根目录创建一个 `vue.config.js` 文件来修改其配置，该文件使用多个配置选项导出对象。
 
-其中有 `css` 选项，有一个`loaderOptions`属性，我们可以使用它来更改 vue-loader 的内部配置。
+其中有 `css` 选项，有一个`loaderOptions`属性，我们可以使用它来更改 `vue-loader` 的内部配置。
 
 可能你并不知道这个方法，我们可以使用data选项执行一些全局的CSS预处理代码，所以我们可以使用它来导入我们的CSS工具：
 
@@ -141,4 +142,6 @@ module.exports = {
 
 实际上它将会包含在每个组件的CSS部分，最终得到10个重复的.box规则。
 
-译文：https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/
+---
+
+译文：[https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/](https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/)
