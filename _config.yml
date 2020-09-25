@@ -102,7 +102,7 @@ ga_domain: yikeshu.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "越努力越幸运~"
+sidebar-about-description: "Don't repeat"
 sidebar-avatar: /favicon-logo.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
