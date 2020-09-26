@@ -1,19 +1,19 @@
 ---
 layout: page
 title: "Read"
+header-img: "img/jenny-yu-project1.jpg"
+org-img: "Jenny Yu"
 ---
 
-<!-- Language Selector -->
-<!-- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select> -->
-
 <!-- Chinese Version -->
-<div class="zh post-container">
+<div class="post-container read-container">
     {% capture read %}{% include read/index.md %}{% endcapture %}
     {{ read | markdownify }}
 </div>
+
+<!-- <div class="donate-con">
+    捐赠一本书
+</div> -->
 
 {% if site.disqus_username %}
 <!-- disqus 评论框 start -->

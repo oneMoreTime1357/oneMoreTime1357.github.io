@@ -114,25 +114,34 @@
 </header>
 {% endif %}
 
-{% if include.type == 'page' %}
+<!-- {% if include.type == 'page' %}
 <header class="intro-header" style="height: 64px;box-shadow: 0 4px 5px #ececec"></header>
-{% endif %}
+{% endif %} -->
 
-{% if include.type == 'poster' %}
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        {% if include.short %}
-        <div class="site-heading" id="tag-heading">
-        {% else %}
-        <div class="site-heading">
-        {% endif %}
-          <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-          <span class="subheading">{{ page.description }}</span>
+{% if include.type == 'page' %}
+  {% if page.header-img %}
+    <header class="intro-header">
+      <div class="header-blur-bg" style="background: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}') 0 / cover">
+      </div>  
+      <div class="container">
+            <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if include.short %}
+                <div class="site-heading" id="tag-heading">
+                {% else %}
+                <div class="site-heading">
+                {% endif %}
+                <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</header>
+        {% if page.org-img %}
+        <a class="org-img-style">{{ page.org-img }}</a>
+        {% endif %}
+    </header>
+  {% else %}
+    <header class="intro-header" style="height: 64px;box-shadow: 0 4px 5px #ececec"></header>
+  {% endif %}
 {% endif %}

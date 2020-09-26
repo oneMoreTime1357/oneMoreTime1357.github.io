@@ -380,6 +380,9 @@ samp {
 // Header
 
 .intro-header {
+  position: relative;
+  overflow: hidden;
+
   &.style-text {
     // background: #BFCBBE;
     .site-heading,
@@ -445,7 +448,7 @@ samp {
     }
     @media only screen and (min-width: 768px) {
       h1 {
-        font-size: 80px;
+        font-size: 68px;
       }
     }
   }
@@ -515,6 +518,24 @@ samp {
         right: 15px;
       }
     }
+  }
+  .org-img-style {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    color: #ececec;
+    font-size: 12px;
+    opacity: 0.2;
+  }
+
+  .header-blur-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    filter: blur(6px);
+    margin: -30px;
   }
 }
 
@@ -1047,6 +1068,15 @@ img::-moz-selection {
   -webkit-overflow-scrolling: touch;
 }
 
+.read-container {
+  ul {
+    margin-bottom: 20px !important;
+  }
+  li {
+    font-size: 14px;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -1054,7 +1084,7 @@ img::-moz-selection {
 }
 ::-webkit-scrollbar-track {
   border-radius: 2px;
-  background: #BFCBBE;
+  background: rgba(191, 203, 190, 0.6);
 }
 
 ::-webkit-scrollbar-thumb {
