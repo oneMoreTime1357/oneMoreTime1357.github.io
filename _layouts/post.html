@@ -27,16 +27,16 @@ layout: default
                     {% if page.previous.url %}
                     <li class="previous">
                         <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
-                        Previous<br>
-                        <span>{{page.previous.title}}</span>
+                            &larr; {{page.previous.title}}<br>
+                        <!-- <span>{{page.previous.title}}</span> -->
                         </a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
                     <li class="next">
                         <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
-                        Next<br>
-                        <span>{{page.next.title}}</span>
+                            {{page.next.title}}&rarr;<br>
+                        <!-- <span>{{page.next.title}}</span> -->
                         </a>
                     </li>
                     {% endif %}
@@ -145,14 +145,14 @@ layout: default
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
+    // async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+    //     anchors.options = {
+    //       visible: 'always',
+    //       placement: 'right',
+    //       icon: '#'
+    //     };
+    //     anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    // })
 </script>
 <style>
     /* place left on bigger screen */

@@ -1,5 +1,5 @@
 # Site settings
-title: 一棵树
+title: 一棵树🌳
 SEOTitle: Dan | Yang | 一棵树
 email: yangdan1357@gmail.com
 description: "关于编程，成长日记，技术成长，读书，黑客与画家"
@@ -9,7 +9,7 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 author: Dan
 
-post_bg: "img/leave.jpeg"
+# post_bg: "img/leave.jpeg"s
 foot_bg: "img/xianrenzhang.jpeg"
 
 # Publish posts or collection documents with a future date.
@@ -26,24 +26,24 @@ yuque_username: u224519
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
-# pages: [
-#     {
-#         title: 'Home',
-#         url: '/'
-#     },
-#     {
-#         title: 'Achive',
-#         url: '/archive'
-#     },
-#     {
-#         title: 'About',
-#         url: '/about'
-#     },
-#     {
-#         title: 'read',
-#         url: '/read'
-#     }
-# ]
+pages: [
+    {
+        title: 'Home',
+        url: '/'
+    },
+    {
+        title: 'Achive',
+        url: '/archive'
+    },
+    {
+        title: 'About',
+        url: '/about'
+    },
+    {
+        title: 'read',
+        url: '/read'
+    }
+]
 
 
 # Build settings
@@ -92,18 +92,18 @@ netease_comment: false
 
 # Analytics settings
 # Baidu Analytics 
-# ba_track_id: [your track id]
+ba_track_id: '86f6e553affd97ccff4cac9ee67a654f'
 
 # Google Analytics
-ga_track_id: 'UA-131009691-1'            # Format: UA-xxxxxx-xx
-ga_domain: yikeshu.me
+# ga_track_id: 'UA-131009691-1'            # Format: UA-xxxxxx-xx
+# ga_domain: yikeshu.me
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Don't repeat"
-sidebar-avatar: /favicon-logo.png      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /sidebar-avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 

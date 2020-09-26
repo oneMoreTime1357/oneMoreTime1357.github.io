@@ -4,7 +4,7 @@
   "description": "jekyll blog",
   "main": "n",
   "scripts": {
-    "test": "n",
+    "test": "jekyll serve",
     "create-file": "",
     "commit": "git add . && npx git-cz"
   },

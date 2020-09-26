@@ -22,5 +22,6 @@ gulp.task('js', function () {
 // 实时编译
 gulp.task('default', gulp.series('less', 'js', function() {
     gulp.watch('less/*.less', gulp.series('less'));
+    gulp.watch('less/_partical', gulp.series('less'));
     gulp.watch('js/blog.js', gulp.series('js'))
 }));

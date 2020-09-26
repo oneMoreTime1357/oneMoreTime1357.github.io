@@ -23,8 +23,20 @@
   h4,
   h5,
   h6 {
-    margin: 18px 0 15px;
-    line-height: 1.4;
+    margin: 16px 0 8px;
+    line-height: 28px;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 24px !important;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 17px;
   }
   h5 {
     font-size: 19px;
@@ -85,13 +97,19 @@
     }
   }
   // V1.6 Hux display title by default.
+  .pager {
+    border-top: 1px solid #ececec;
+  }
   .pager li {
-    width: 48%;
+    // width: 48%;
+    // border: none;
     &.next {
       float: right;
+      text-align: right;
     }
     &.previous {
       float: left;
+      text-align: left;
     }
     > a {
       width: 100%;

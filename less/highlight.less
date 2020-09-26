@@ -3,8 +3,10 @@
 
 .highlight,
 pre.highlight {
-  background: #282c34;
-  color: #abb2bf;
+  background: #f9f9f9;
+  color: #595959;
+  white-space: pre-wrap;
+  border: 1px solid #e8e8e8;
 }
 .highlight pre {
   background: #282c34;
@@ -17,8 +19,8 @@ pre.highlight {
   font-style: italic;
 }
 .highlight .err {
-  color: #960050;
-  background-color: #1e0010;
+  // color: #960050;
+  // background-color: #1e0010;
 }
 .highlight .k {
   color: #c678dd;
@@ -27,13 +29,13 @@ pre.highlight {
   color: #98c379;
 }
 .highlight .n {
-  color: #abb2bf;
+  color: #595959;
 }
 .highlight .o {
-  color: #abb2bf;
+  color: #595959;
 }
 .highlight .p {
-  color: #abb2bf;
+  color: #595959;
 }
 .highlight .cm {
   color: #5c6370;
@@ -44,11 +46,11 @@ pre.highlight {
   font-style: italic;
 }
 .highlight .c1 {
-  color: #5c6370;
+  color: #a4a4a5;
   font-style: italic;
 }
 .highlight .cs {
-  color: #5c6370;
+  color: #a4a4a5;
   font-style: italic;
 }
 .highlight .ge {
@@ -91,7 +93,7 @@ pre.highlight {
   color: #e5c07b;
 }
 .highlight .nc {
-  color: #e5c07b;
+  color: #c58a19;
 }
 .highlight .no {
   color: #e5c07b;
@@ -106,16 +108,16 @@ pre.highlight {
   color: #e5c07b;
 }
 .highlight .nf {
-  color: #abb2bf;
+  color: #595959;
 }
 .highlight .nl {
-  color: #e5c07b;
+  color: #797773;
 }
 .highlight .nn {
-  color: #abb2bf;
+  color: #595959;
 }
 .highlight .nx {
-  color: #abb2bf;
+  color: #005cc5;
 }
 .highlight .py {
   color: #e5c07b;
@@ -205,11 +207,12 @@ pre.highlight {
 // Customize for Hux Blog
 .highlighter-rouge .highlight {
   margin-bottom: 10px;
+  margin-top: 10px;
   border-radius: 6px;
   pre {
     font-size: 14px;
     line-height: 1.5;
-    color: #555;
+    color: #595959;
     background: transparent;
     border: 0;
     margin: 0;
@@ -218,7 +221,7 @@ pre.highlight {
   }
   .rouge-code {
     pre {
-      color: #abb2bf; // default color for nil-lang code
+      color: #595959; // default color for nil-lang code
     }
   }
   .table-responsive {
@@ -235,15 +238,16 @@ pre.highlight {
       border: 0;
       padding: 0;
       > pre {
-        padding: 14px;
+        padding: 8px;
       }
     }
   }
   td.rouge-gutter {
-    width: 56px;
+    width: 40px;
   }
   .lineno {
     text-align: right;
+    color: #bfbfbf;
     // border-right: 1px solid #373434;
     border-radius: 0px;
   }
