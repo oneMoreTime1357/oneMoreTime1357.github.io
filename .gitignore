@@ -7,3 +7,5 @@ npm-debug.log
 *.sh 
 .vscode
 .jekyll-cache
+
+yarn-error.log
