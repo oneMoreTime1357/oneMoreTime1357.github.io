@@ -5,7 +5,6 @@ tags:
     - Think
 ---
 
-![image.png](https://upload-images.jianshu.io/upload_images/1205680-d82461952344c139.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ​俗话说：“好记性，不如烂笔头”
 
 对于技术人员来说尤其适用，越学越发现知道的太少，需要学习的知识就越多。
@@ -66,4 +65,4 @@ tags:
 
 ---
 
-原文链接：https://mp.weixin.qq.com/s/N6MbaO0-yfqcsP2XexJAeA
+<a href="https://mp.weixin.qq.com/s/N6MbaO0-yfqcsP2XexJAeA" target="_blank">原文链接</a>
