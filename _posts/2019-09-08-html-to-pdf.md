@@ -104,6 +104,8 @@ doc.addImage(imgData, 10, 40, 180, 180);
 
 **参考链接**
 
-很详细的一篇教程 https://github.com/linwalker/render-html-to-pdf
+很详细的一篇教程 
 
-https://github.com/niklasvh/html2canvas/issues/117
+<a href="https://github.com/linwalker/render-html-to-pdf" target="_blank">https://github.com/linwalker/render-html-to-pdf</a>
+
+<a href="https://github.com/niklasvh/html2canvas/issues/117" target="_blank">https://github.com/niklasvh/html2canvas/issues/117</a>
