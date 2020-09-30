@@ -16,7 +16,7 @@ foot_bg: "img/xianrenzhang.jpeg"
 future: true
 
 # SNS settings
-RSS: false
+RSS: true
 weibo_username:     
 zhihu_username:     
 github_username: oneMoreTime1357
