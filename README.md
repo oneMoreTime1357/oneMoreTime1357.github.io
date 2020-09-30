@@ -12,8 +12,9 @@
 请看官网[https://jekyllrb.com/docs/installation/](https://jekyllrb.com/docs/installation/)写的很详细了
 
 **需要注意的点**
-本人使用的是macOS Mojave 10.14.x系统
-terminal zsh item2
+
+* 本人使用的是macOS Mojave 10.14.x系统
+* terminal zsh item2
 
 在使用brew安装ruby之后，要更改下ruby的引用路径，要优先使用brew安装的ruby
 
