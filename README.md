@@ -1,8 +1,8 @@
 欢迎来到一棵树的博客🎉🚀 http://yikeshu.me 🌲
 
-🌲 本博客主要采用Jekyll，github pages生成
-✨ 如果喜欢请点击star
-🤩 如果想使用本博客主题，可以fork，或者拷贝到本地，记得把本博客的内容删掉，网站域名换上自己的，上传到自己的github pages就OK了😘
+* 🌲 本博客主要采用Jekyll，github pages生成
+* ✨ 如果喜欢请点击star
+* 🤩 如果想使用本博客主题，可以fork，或者拷贝到本地，记得把本博客的内容删掉，网站域名换上自己的，上传到自己的github pages就OK了😘
 
 
 ---
