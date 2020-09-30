@@ -9,7 +9,7 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 author: Dan
 
-# post_bg: "img/leave.jpeg"s
+# post_bg: ""
 foot_bg: "img/xianrenzhang.jpeg"
 
 # Publish posts or collection documents with a future date.
@@ -23,7 +23,7 @@ github_username: oneMoreTime1357
 jianshu_username: 459674901bd7
 twitter_username: 
 yuque_username: dan.yang
-#facebook_username:  huxpro
+#facebook_username:  xx
 #linkedin_username:  firstname-lastname-idxxxx
 
 pages: [
