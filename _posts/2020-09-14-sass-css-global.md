@@ -2,7 +2,6 @@
 layout:     post
 title:      View：在vue中全局加载sass
 tags:
-    - 译读
     - View
     - JS
 ---

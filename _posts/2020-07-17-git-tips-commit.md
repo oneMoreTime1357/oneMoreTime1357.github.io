@@ -4,7 +4,7 @@ title:      Git tips： Git commit -m多行提交
 date:  2020-7-17
 tags:
     - 笔记
-    - Git tips
+    - Git
 ---
 
 当使用命令行Git commit 提交代码时，大部分如下，提交一行信息。

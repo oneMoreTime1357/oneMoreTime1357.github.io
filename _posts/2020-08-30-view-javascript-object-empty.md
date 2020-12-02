@@ -2,7 +2,6 @@
 layout:     post
 title:      View：如何检测JavaScript对象是否为空
 tags:
-    - 译读
     - View
     - JS
 ---

@@ -3,6 +3,7 @@ layout:     post
 title:      不花一分钱，创建自己的网站之VuePress
 tags:
     - Vue
+    - 笔记
 ---
 
 VuePress 官方地址

@@ -2,7 +2,6 @@
 layout:     post
 title:      View：7个不使用typescript的好理由
 tags:
-    - 译读
     - View
     - TypeScript
 ---

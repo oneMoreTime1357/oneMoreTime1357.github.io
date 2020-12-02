@@ -1,10 +1,9 @@
 ---
 layout:     post
-title:      Splice, Slice, Split傻傻分不清楚[读译]
+title:      View：Splice, Slice, Split傻傻分不清楚
 tags:
     - JS
-    - 笔记
-    - 读译
+    - View
 ---
 
 读[JavaScript Splice,Slice,Split](https://medium.com/@jeanpan/javascript-splice-slice-split-745b1c1c05d2)
