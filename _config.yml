@@ -4,7 +4,7 @@ SEOTitle: Dan | Yang | 一棵树
 email: yangdan1357@gmail.com
 description: "关于编程，成长日记，技术成长，读书，黑客与画家"
 keyword: "博客, 个人网站, 互联网, Web, JavaScript, 前端, Jekyll"
-url: "http://yikeshu.me"              # your host, for absolute URL
+url: "https://onemoretime1357.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 author: Dan

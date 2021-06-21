@@ -137,5 +137,5 @@ module.exports = {
 
 执行完部署脚本之后，就可以发现远程分支多了一个 `gh-pages` 这个分支，有了这个分支就可以通过GitHub pages的域名后面拼上这个仓库名称，访问到这个文档的界面了。
 
-如:[http://yikeshu.me/onepress/](http://yikeshu.me/onepress/)
+如:[https://onemoretime1357.github.io/onepress/](http://yikeshu.me/onepress/)
 我这里是使用了自定义域名，如果你直接只用GitHub pages的域名，那直接在域名后面拼上仓库名称就可以访问了。如：https://<USERNAME>.github.io/<REPO>
