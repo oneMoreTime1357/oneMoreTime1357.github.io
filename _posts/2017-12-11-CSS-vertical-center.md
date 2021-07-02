@@ -24,11 +24,7 @@ css
 
 ```css
 .main {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    position: relative;
 }
 .center {
     position: absolute;
@@ -39,7 +35,8 @@ css
 }
 ```
 
-- 原理就是使用绝对定位相对于父元素，左边偏移50%，右边偏移50%，然后再使用**[transform](https://www.w3cplus.com/content/css3-transform)**中的translate进行位移，translate移动是根据元素中心作为参考值移动的，所以以元素中心为基点，再向左向上移动-50%，此元素就达到居中的效果了。
+- 原理就是使用绝对定位相对于父元素，先设置居左left、居上top偏移50%，此偏移是根据当前元素的左上角定位的，此时还不能居中，想要居中还需要设置位移。
+- 再使用**[transform](https://www.w3cplus.com/content/css3-transform)**中的translate进行位移，translate移动是根据元素中心作为参考值移动的，所以以元素中心为基点，再向左、向上移动-50%（自身宽度的一半），此元素就达到居中的效果了。
 
 #### table垂直居中
 
