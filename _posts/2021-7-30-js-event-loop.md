@@ -285,5 +285,5 @@ process.nextTick(function foo() {
 
 [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
-[微任务、宏任务与Event-Loop](https://juejin.cn/post/6844903657264136200)https://juejin.cn/post/6844903657264136200)
+[微任务、宏任务与Event-Loop](https://juejin.cn/post/6844903657264136200)
 
