@@ -264,4 +264,8 @@ npm run start
 
 项目实践github地址[nest-todolist](https://github.com/oneMoreTime1357/nest-todolist)
 
+---
+
 [Nestjs and Mysql in 5 Minutes](https://shaibenshimol.medium.com/nestjs-and-mysql-in-10-minutes-711e02ec1dab)
+
+[Nest 文档](https://docs.nestjs.cn/7/introduction)
