@@ -3,6 +3,7 @@ layout:     post
 title:    JavaScript运行机制，Event Loop
 tags:
     - 笔记
+    - JS
 ---
 
 ## 为什么JavaScript是单线程

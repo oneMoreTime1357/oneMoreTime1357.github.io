@@ -3,6 +3,7 @@ layout:     post
 title:    Nest start & MySQL 5分钟开始一个项目
 tags:
     - Nest
+    - Node
 ---
 
 在这个教程里你将学到执行一个Nestjs程序有多简单，如下是使用的版本工具：
