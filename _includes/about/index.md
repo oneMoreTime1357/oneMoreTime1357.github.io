@@ -10,4 +10,4 @@
 
 实践项目
 * <a href="https://onemoretime1357.github.io/vue-cactus-ui/" target="__blank">UI组件库doc地址</a>
-* <a href="[https://onemoretime1357.github.io/onepress/](https://onemoretime1357.github.io/onepress/)">共享文档onepress</a>
+* <a href="https://onemoretime1357.github.io/onepress/">共享文档onepress</a>
