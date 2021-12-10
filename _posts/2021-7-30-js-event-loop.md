@@ -72,7 +72,7 @@ JavaScript是单线程与它的用途有关。作为浏览器脚本语言，与�
 
 一个例子
 
-```
+```js
 const foo = () => console.log("First");
 const bar = () => setTimeout(() => console.log("Second"), 500);
 const baz = () => console.log("Third");
@@ -92,7 +92,7 @@ baz();
 
 定时器setTimeout、setInterval，这两个函数的运行机制是一样的，区别在于，前者指定时间只执行一次，后者重复反复执行。
 
-```
+```js
 setTimeout(() => {
     console.log('hello')
 }, 200)
@@ -108,7 +108,7 @@ setTimeout(() => {
 
 
 
-```
+```js
 console.log('script start');
 
 setTimeout(function () {
@@ -130,7 +130,7 @@ console.log('script end');
 
 
 
-```
+```js
 script start
 script end
 promise1
@@ -193,7 +193,7 @@ Node js独有的方法，process.nextTick、setImmediate。
 
 process.nextTick可以在当前执行栈的尾部，下一次Event Loop之前触发回调函数。也就是说，它指定的任务总是发生在所有异步任务调用之前。
 
-```
+```js
 process.nextTick(function A() {
   console.log(1);
   process.nextTick(function B(){console.log(2);});
@@ -213,7 +213,7 @@ setTimeout(function timeout() {
 
 输出如下：
 
-```
+```js
 promise 1
 1
 2
@@ -229,7 +229,7 @@ TIMEOUT FIRED
 
 看如下代码执行
 
-```
+```js
 setImmediate(function A() {
   console.log(1);
   setImmediate(function B(){console.log(2);});
@@ -246,7 +246,7 @@ setTimeout(function timeout() {
 
 但Node文档中称setImmediate总是排在setTimeout前面，但下面的代码把这两个函数封装在一个异步回调里。
 
-```
+```js
 require('fs').readFile(__dirname, _ => {
   setTimeout(_ => console.log('timeout'))
   setImmediate(function A() {
@@ -270,7 +270,7 @@ require('fs').readFile(__dirname, _ => {
 
 但这也是添加setImmediate方法的原因，如果像下面这样总也执行不完
 
-```
+```js
 process.nextTick(function foo() {
   process.nextTick(foo);
 });
